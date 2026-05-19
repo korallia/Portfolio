@@ -1,5 +1,14 @@
-
+import { useLocation, useNavigate } from "react-router-dom";
 function NavBar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const navItemClass = (path, accent ="#F97316") => {
+    const isActive = location.pathname === path;
+    return isActive
+    ? "text-[#F97316] bg-[#F97316]/5 border-2 border-[#F97316]/40 px-4 py-2 uppercase transition-all shadow-[2px_2px_0px_0px_rgba(249,115,22,0.1)]"
+    : "text-slate-400 hover:text-[#F59E0B] hover:bg-[#F59E0B]/5 border-2 border-transparent hover:border-[#26221F] px-4 py-2 uppercase transition-all";
+  }
   return (
       <nav className="fixed top-0 left-0 right-0 h-20 bg-[#0B0D0F] border-b-4 border-[#26221F] z-50 font-[JetBrains_Mono] px-6 md:px-16 flex items-center justify-between shadow-[0_4px_35px_rgba(0,0,0,0.95)]">
         
@@ -16,17 +25,35 @@ function NavBar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-6 text-sm md:text-base font-black tracking-wide">
-          <a href="#" className="text-[#F97316] bg-[#F97316]/5 border-2 border-[#F97316]/40 px-4 py-2 uppercase transition-all shadow-[2px_2px_0px_0px_rgba(249,115,22,0.1)]">
-            [ Accueil ]
-          </a>
-          <a href="#" className="text-slate-400 hover:text-[#00E676] hover:bg-[#00E676]/5 border-2 border-transparent hover:border-[#26221F] px-4 py-2 uppercase transition-all">
-            [ Répertoire ]
-          </a>
-          <a href="#" className="text-slate-400 hover:text-[#F59E0B] hover:bg-[#F59E0B]/5 border-2 border-transparent hover:border-[#26221F] px-4 py-2 uppercase transition-all">
-            [ Journal ]
-          </a>
-        </div>
+       <div className="flex items-center gap-3 md:gap-6 text-sm md:text-base font-black tracking-wide">
+  <button
+    onClick={() => navigate("/")}
+    className= {navItemClass("/")}
+     >
+    [ Accueil ]
+  </button>
+
+  <button
+    onClick={() => navigate("/repertoire")}
+     className= {navItemClass("/repertoire")}
+     >
+    [ Répertoire ]
+  </button>
+
+  <button
+    onClick={() => navigate("/whoami")}
+     className= {navItemClass("/whoami")}
+     >
+    [ WHOAMI ]
+  </button>
+
+  <button
+    onClick={() => navigate("/journal")}
+     className= {navItemClass("/journal")}
+     >
+    [ Journal ]
+  </button>
+</div>
       </nav>
   )
 }
