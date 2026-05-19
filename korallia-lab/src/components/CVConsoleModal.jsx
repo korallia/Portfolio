@@ -1,13 +1,30 @@
-import { useEffect, useState } from "react";
-function CVConsoleModal() {
-    const [isCvConsoleOpen, setIsCvConsoleOpen] = useState(false);
-    const [cvConsoleLines, setCvConsoleLines] = useState([]);
+import { useEffect } from "react";
+function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, setIsCvConsoleOpen} ) {
 
-    useEffect(() => {
-        if (!isCvConsoleOpen) {
-        setCvConsoleLines([]);
-        return;
+     useEffect(() => {
+    if (!isCvConsoleOpen) {
+      setCvConsoleLines([]);
+      return;
     }
+
+    const lines = [
+      { text: "korallia-lab:~$ run cv.sh", color: "text-slate-300", delay: 200 },
+      { text: "> loading experience logs...", color: "text-green-400/80", delay: 550 },
+      { text: "> mounting professional profile...", color: "text-green-400/80", delay: 900 },
+      { text: "> rendering console resume...", color: "text-green-400/80", delay: 1250 },
+      { text: "> ready.", color: "text-green-400", delay: 1650 },
+      { text: "[ OUTPUT_READY ]", color: "text-green-400 font-bold", delay: 2100 },
+    ];
+
+    const timers = lines.map((line) =>
+      setTimeout(() => {
+        setCvConsoleLines((currentLines) => [...currentLines, line]);
+      }, line.delay)
+    );
+
+    return () => timers.forEach(clearTimeout);
+  }, [isCvConsoleOpen]);
+
 
     const cvExperiences = 
     [{
@@ -55,6 +72,25 @@ function CVConsoleModal() {
       ],
     },
   ];
+    const getStatusBadgeClass = (status) => {
+        switch (status) {
+            case "ACTIVE":
+            return "text-green-400 border-green-500/40 bg-green-500/10";
+
+            case "FREELANCE":
+            return "text-cyan-400 border-cyan-500/40 bg-cyan-500/10";
+
+            case "WEB_SYSTEMS":
+            return "text-orange-400 border-orange-500/40 bg-orange-500/10";
+
+            case "ENTERPRISE":
+            return "text-slate-300 border-slate-500/40 bg-slate-500/10";
+
+            default:
+            return "text-slate-400 border-slate-600/40 bg-slate-600/10";
+        }
+    };
+    
     const cvSkillMatrix = [
     {
       label: "FRONT",
@@ -86,46 +122,11 @@ function CVConsoleModal() {
     },
   ];
 
-    const getStatusBadgeClass = (status) => {
-        switch (status) {
-            case "ACTIVE":
-            return "text-green-400 border-green-500/40 bg-green-500/10";
-
-            case "FREELANCE":
-            return "text-cyan-400 border-cyan-500/40 bg-cyan-500/10";
-
-            case "WEB_SYSTEMS":
-            return "text-orange-400 border-orange-500/40 bg-orange-500/10";
-
-            case "ENTERPRISE":
-            return "text-slate-300 border-slate-500/40 bg-slate-500/10";
-
-            default:
-            return "text-slate-400 border-slate-600/40 bg-slate-600/10";
-        }
-    };
-    
-    const lines = [
-      { text: "korallia-lab:~$ run cv.sh", color: "text-slate-300", delay: 200 },
-      { text: "> loading experience logs...", color: "text-green-400/80", delay: 550 },
-      { text: "> mounting professional profile...", color: "text-green-400/80", delay: 900 },
-      { text: "> rendering console resume...", color: "text-green-400/80", delay: 1250 },
-      { text: "> ready.", color: "text-green-400", delay: 1650 },
-      { text: "[ OUTPUT_READY ]", color: "text-green-400 font-bold", delay: 2100 },
-    ];
-
-
-    const timers = lines.map((line) =>
-        setTimeout(() => {
-            setCvConsoleLines((currentLines) => [...currentLines, line]);
-        }, line.delay)
-        );
-        return () => timers.forEach(clearTimeout);
-    }, [isCvConsoleOpen]);
 
     const isCvBootDone = cvConsoleLines.some((line) => line.text === "> ready.");
 
   return (
+    isCvConsoleOpen && (
         <div className="fixed inset-0 z-50 bg-[#020304]/95 backdrop-blur-sm p-4 md:p-10 font-mono text-slate-300 overflow-y-auto">
           <div className="max-w-5xl mx-auto border-2 border-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.18)]">
             <div className="bg-[#24201E] border-b-2 border-[#F97316] px-4 py-2 flex items-center justify-between text-xs text-[#F59E0B] font-bold">
@@ -316,6 +317,6 @@ function CVConsoleModal() {
                 </div>
             </div>
         </div>
-    )}
+    ))}
 
 export default CVConsoleModal

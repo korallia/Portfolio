@@ -1,9 +1,13 @@
+import { useState, } from "react";
+
 import WhoamiTerminal from "../WhoamiTerminal";
 import TechStack from "../TechStack";
 import SideQuest from "../SideQuest";
 import ExperienceBuilds from "../ExperienceBuilds";
+import CVConsoleModal from "../CVConsoleModal";
 const Portfolio = () => {
-
+   const [isCvConsoleOpen, setIsCvConsoleOpen] = useState(false);
+   const [cvConsoleLines, setCvConsoleLines] = useState([]);
 
   return (
     <div className="min-h-screen w-full bg-[#0E0D0C] bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:4rem_4rem] text-slate-300 p-4 md:p-12 font-mono selection:bg-[#F97316]/30">
@@ -14,7 +18,13 @@ const Portfolio = () => {
         </div>
         <div className="lg:col-span-5 flex flex-col gap-6">
           <TechStack/>
-          <ExperienceBuilds/>
+          <ExperienceBuilds setCvConsoleOpen = {setIsCvConsoleOpen}/>
+          <CVConsoleModal
+            isCvConsoleOpen={isCvConsoleOpen}
+            setCvConsoleLines={setCvConsoleLines}
+            cvConsoleLines={cvConsoleLines}
+            setIsCvConsoleOpen={setIsCvConsoleOpen}
+          />
         </div> 
       </div>
     </div>
