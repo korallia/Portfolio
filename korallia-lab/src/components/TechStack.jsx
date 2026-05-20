@@ -16,26 +16,26 @@
   { name: "Java/Spring Boot", cat: "back", color: "text-sky-400 border-sky-950/60 bg-sky-950/10" },
   
   // SYSTEM (Blanc Terminal Pur)
-  { name: "Java / JVM", cat: "software", color: "text-zinc-400 border-zinc-800 bg-zinc-800/20" },
-  { name: "Python", cat: "software", color: "text-zinc-400 border-zinc-800 bg-zinc-800/20" },
-  { name: "C / C++", cat: "software", color: "text-zinc-400 border-zinc-800 bg-zinc-800/20" },
+  { name: "Java / JVM", cat: "software", color: "text-slate-300 border-zinc-800 bg-zinc-800/15" },
+  { name: "Python", cat: "software", color: "text-slate-300 border-zinc-800 bg-zinc-800/15" },
+  { name: "C / C++", cat: "software", color: "text-slate-300 border-zinc-800 bg-zinc-800/15" },
   
   // DATA (Ambre Doré - Chaud et ultra lisible)
-  { name: "PostgreSQL", cat: "bd", color: "text-amber-400 border-amber-950/60 bg-amber-950/10" },
-  { name: "Prisma", cat: "bd", color: "text-amber-400 border-amber-950/60 bg-amber-950/10" },
-  { name: "MongoDB", cat: "bd", color: "text-amber-400 border-amber-950/60 bg-amber-950/10" }
+  { name: "PostgreSQL", cat: "bd", color: "text-amber-500 border-amber-950/60 bg-amber-950/10" },
+  { name: "Prisma", cat: "bd", color: "text-amber-500 border-amber-950/60 bg-amber-950/10" },
+  { name: "MongoDB", cat: "bd", color: "text-amber-500 border-amber-950/60 bg-amber-950/10" }
 ];
 
         const techGroups = [
             { label: "FRONT", cat: "front", node: "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10" },
             { label: "BACK", cat: "back", node: "text-sky-400 border-sky-950/60 bg-sky-950/10" },
-            { label: "SYSTEM", cat: "software", node: "text-zinc-400 border-zinc-800 bg-zinc-800/20" },
-            { label: "DATA", cat: "bd", node: "text-amber-400 border-amber-950/60 bg-amber-950/10" },
+            { label: "SYSTEM", cat: "software", node: "text-slate-300 border-zinc-800 bg-zinc-800/15" },
+            { label: "DATA", cat: "bd", node: "text-amber-500 border-amber-950/60 bg-amber-950/10" },
         ];
     return (
             <div className="bg-[#020304] border-2 border-[#26221F] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
                 <div className="border-b-2 border-[#26221F] px-4 py-2 bg-[#0B0D0F] flex justify-between items-center select-none min-h-[38px]">
-                     <span className="text-xs font-bold">[ /sys/tech_stack ]</span>
+                     <span className="text-xs font-bold text">[ /sys/tech_stack ]</span>
                         <span className="flex items-center h-full text-zinc-400 text-[12px] select-none">
   [ PCB_MODE ]
 </span>

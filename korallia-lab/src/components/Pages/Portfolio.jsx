@@ -20,7 +20,7 @@ const Portfolio = () => {
         <div className="lg:col-span-7 flex flex-col">
           
           {/* UPDATE : On baisse Whoami en lui mettant un padding top (lg:pt-10) au lieu de le remonter */}
-          <div className="lg:pt-6">
+          <div className="lg:pt-0">
             <WhoamiTerminal/>
           </div>
           
@@ -34,7 +34,7 @@ const Portfolio = () => {
         
         {/* COLONNE DROITE (TechStack + ExperienceBuilds) */}
         {/* UPDATE : On remonte les deux boîtes en réduisant le pt à lg:pt-4 */}
-        <div className="lg:col-span-5 flex flex-col gap-10 lg:pt-8">
+        <div className="lg:col-span-5 flex flex-col gap-10 lg:pt-6">
           
           <TechStack/>
           
