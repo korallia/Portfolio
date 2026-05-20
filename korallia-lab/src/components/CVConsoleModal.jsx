@@ -73,43 +73,43 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
     },
   ];
     const getStatusBadgeClass = (status) => {
-        switch (status) {
-            case "ACTIVE":
-            return "text-green-400 border-green-500/40 bg-green-500/10";
+  switch (status) {
+    case "ACTIVE":
+      return "text-emerald-400 border-emerald-950/60 bg-emerald-950/10";
 
-            case "FREELANCE":
-            return "text-cyan-400 border-cyan-500/40 bg-cyan-500/10";
+    case "FREELANCE":
+      return "text-sky-400 border-sky-950/60 bg-sky-950/10";
 
-            case "WEB_SYSTEMS":
-            return "text-orange-400 border-orange-500/40 bg-orange-500/10";
+    case "WEB_SYSTEMS":
+      return "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10";
 
-            case "ENTERPRISE":
-            return "text-slate-300 border-slate-500/40 bg-slate-500/10";
+    case "ENTERPRISE":
+      return "text-violet-300 border-violet-900/70 bg-violet-950/20";
 
-            default:
-            return "text-slate-400 border-slate-600/40 bg-slate-600/10";
-        }
-    };
+    default:
+      return "text-slate-400 border-zinc-800 bg-zinc-800/10";
+  }
+};
     
     const cvSkillMatrix = [
     {
       label: "FRONT",
-      color: "text-cyan-400 border-cyan-500/30",
+      color: "text-fuchsia-400 border-fuchsia-950/60",
       value: "React.js · Next.js · TailwindCSS · UX structure · responsive UI",
     },
     {
       label: "BACK",
-      color: "text-green-400 border-green-500/30",
+      color: "text-sky-400 border-sky-950/60 bg-sky-950/10",
       value: "Node.js · TypeScript · Python/Flask · PHP/Laravel · Java/Spring Boot",
     },
     {
       label: "SYSTEM",
-      color: "text-slate-300 border-slate-500/30",
+      color: "text-slate-300 border-zinc-800",
       value: "Java/JVM · Python · C/C++ · debugging · software maintenance",
     },
     {
       label: "DATA",
-      color: "text-fuchsia-400 border-fuchsia-500/30",
+      color: "text-amber-500 border-amber-950/60",
       value: "PostgreSQL · Prisma · MongoDB · data modeling",
     },
   ];
@@ -131,11 +131,12 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
           <div className="max-w-5xl mx-auto border-2 border-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.18)]">
             <div className="bg-[#24201E] border-b-2 border-[#F97316] px-4 py-2 flex items-center justify-between text-xs text-[#F59E0B] font-bold">
               <span>~/korallia-lab $ ./RUN_CV.sh</span>
-              <button
-                onClick={() => setIsCvConsoleOpen(false)}
-                 className="text-[14px] text-red-400 border border-red-500/50 bg-orange-500/5 px-2 py-0.5 hover:bg-orange-500/15 hover:border-red-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)]">
-                    CLOSE
-              </button>
+          <button
+  onClick={() => setIsCvConsoleOpen(false)}
+  className="text-[12px] text-[#FF6B6B] border border-[#DC2626]/80 bg-[#7F1D1D]/35 px-3 py-1 hover:bg-[#991B1B]/55 hover:border-[#EF4444] hover:text-[#FECACA] transition-all font-bold cursor-pointer select-none shadow-[2px_2px_0px_0px_rgba(127,29,29,0.35)]"
+>
+  CLOSE
+</button>
             </div>
 
             <div className="p-6 md:p-8 space-y-2 text-sm min-h-[320px]">

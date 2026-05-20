@@ -26,7 +26,7 @@ const Portfolio = () => {
           
           {/* UPDATE : On remonte SideQuest (lg:translate-y-6) pour qu'il serre le terminal, */}
           {/* mais il garde une marge (mt-10) pour ne pas l'écraser sur mobile */}
-          <div className="mt-4 lg:translate-y-6">
+          <div className="mt-5 lg:translate-y-6">
             <SideQuest/>
           </div>
           
@@ -34,7 +34,7 @@ const Portfolio = () => {
         
         {/* COLONNE DROITE (TechStack + ExperienceBuilds) */}
         {/* UPDATE : On remonte les deux boîtes en réduisant le pt à lg:pt-4 */}
-        <div className="lg:col-span-5 flex flex-col gap-10 lg:pt-6">
+        <div className="lg:col-span-5 flex flex-col gap-10 lg:pt-8">
           
           <TechStack/>
           

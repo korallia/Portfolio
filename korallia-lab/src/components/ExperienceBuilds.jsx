@@ -4,22 +4,22 @@
         const experienceBuilds = [
         {
         key: "PANASSOR",
-        color: "text-orange-400 border-orange-500/30",
+        color: "text-amber-500 border-amber-950/60",
         text: "co-founder · CTO · product strategy · ops · e-commerce · production systems",
         },
         {
         key: "PHOENIX_GN",
-        color: "text-cyan-400 border-cyan-500/30",
+        color: "text-fuchsia-400 border-fuchsia-950/60",
         text: "frontend modernization · UX structure · custom portal rebuild",
         },
         {
         key: "BLAX",
-        color: "text-green-400 border-green-500/30",
+        color: "text-sky-400 border-sky-950/60",
         text: "full-stack development · debugging · releases · product reliability",
         },
         {
         key: "MICRO_FOCUS",
-        color: "text-slate-300 border-slate-500/30",
+        color: "text-violet-300 border-violet-900/70",
         text: "enterprise Java · software maintenance · technical use cases",
         },
     ];
@@ -29,7 +29,7 @@
               <span className="text-xs font-bold">[ /var/log/experience_builds ]</span>
                 <button
                     onClick={() => setCvConsoleOpen(true)}
-                    className="text-[12px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-2 py-0.5 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)] flex items-center h-full"
+                    className="text-[12px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-3 py-1 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)] flex items-center h-full"
                 >
                     ./RUN_CV.sh
                 </button>
@@ -42,7 +42,7 @@
                   className={`grid grid-cols-[95px_1fr] gap-3 border-l pl-3 ${item.color}`}
                 >
                   <span className="font-bold">{item.key}</span>
-                  <span className="text-slate-400">{item.text}</span>
+                  <span className="text-slate-300">{item.text}</span>
                 </div>
               ))}
             </div>
