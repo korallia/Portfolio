@@ -29,7 +29,7 @@
               <span className="text-xs font-bold">[ /var/log/experience_builds ]</span>
                 <button
                     onClick={() => setCvConsoleOpen(true)}
-                    className="text-[12px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-2 py-0.5 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)]"
+                    className="text-[12px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-2 py-0.5 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)] flex items-center h-full"
                 >
                     ./RUN_CV.sh
                 </button>

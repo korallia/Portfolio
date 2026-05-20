@@ -12,7 +12,7 @@
             },
         ];
     return (
-        <div className="bg-[#050407] border border-[#2B2030]/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.65)] w-full max-w-2xl">
+        <div className="bg-[#050407] border border-[#26221F]/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.65)] w-full max-w-2xl">
             <div className="border-b border-[#2B2030]/70 px-4 py-2 bg-[#09070C] flex justify-between items-center">
                 <span className="text-xs font-bold text-purple-400">
                 [ ~/side-quests ]
