@@ -3,7 +3,7 @@ function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navItemClass = (path, accent ="#F97316") => {
+  const navItemClass = (path) => {
     const isActive = location.pathname === path;
     return isActive
     ? "text-[#F97316] bg-[#F97316]/5 border-2 border-[#F97316]/40 px-4 py-2 uppercase transition-all shadow-[2px_2px_0px_0px_rgba(249,115,22,0.1)]"
