@@ -75,25 +75,24 @@ function JournalArticle() {
         <div className="absolute -right-2 top-2 h-full w-2 bg-[#3A1F0B]/70 pointer-events-none" />
         <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#3A1F0B]/70 pointer-events-none" />
         
-        {/* ================= ZONE EN-TÊTE ================= */}
+        {/* ================= ZONE EN-TÊTE EN DÉGRADÉ PROGRESSIF ================= */}
         <div className="bg-gradient-to-b from-[#0B0D0F] via-[#0B0D0F] to-[#050607] w-full pb-10 border-b border-[#26221F]/30">
           
           {/* TOP BAR */}
-         <div className="relative z-10 px-6 md:px-12 pt-8 pb-6 border-b border-[#26221F]/60 flex flex-wrap items-center justify-between gap-4">
-  {/* AUGMENTATION DU GAP ICI : gap-3 -> gap-6 */}
-  <div className="flex flex-wrap items-center gap-6 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em]">
-    <span className="text-[#8F7A68]">[ ID: {article.number} ]</span>
-    <span className={getCategoryTextColor(article.category)}>{article.category}</span>
-    <span className="text-[#8F7A68] font-bold uppercase tracking-[0.14em]">{article.read_time}</span>
-  </div>
+          <div className="relative z-10 px-6 md:px-12 pt-8 pb-6 border-b border-[#26221F]/60 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em]">
+              <span className="text-[#8F7A68]">[ ID: {article.number} ]</span>
+              <span className={getCategoryTextColor(article.category)}>{article.category}</span>
+              <span className="text-[#8F7A68]/60 font-normal normal-case italic">{article.read_time}</span>
+            </div>
 
-  <button
-    onClick={() => navigate("/journal")}
-    className="border border-[#F59E0B]/35 bg-[#F59E0B]/5 px-4 py-1.5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em] text-[#F59E0B] transition hover:border-[#F97316] hover:bg-[#F97316]/15 hover:text-[#F97316]"
-  >
-    [ ← ARCHIVES ]
-  </button>
-</div>
+            <button
+               onClick={() => navigate("/journal#archives")}
+              className="border border-[#F59E0B]/35 bg-[#F59E0B]/5 px-4 py-1.5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em] text-[#F59E0B] transition hover:border-[#F97316] hover:bg-[#F97316]/15 hover:text-[#F97316]"
+            >
+              [ ← ARCHIVES ]
+            </button>
+          </div>
 
           {/* EN-TÊTE CENTRÉ */}
           <header className="px-4 md:px-12 pt-14 pb-4 text-center w-full max-w-3xl mx-auto">
@@ -112,9 +111,10 @@ function JournalArticle() {
           </header>
         </div>
 
-        {/* ================= ZONE DE LECTURE ================= */}
+        {/* ================= ZONE DE LECTURE (NOIR ABYSSAL PUR) ================= */}
         <div className="w-full px-4 md:px-12 pt-12 pb-24 flex flex-col items-center">
           
+          {/* FLUX DE LECTURE DIRECT */}
           <div className="relative w-full max-w-3xl">
             <div className="journal-article-body">
               <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />
@@ -124,14 +124,14 @@ function JournalArticle() {
         </div>
       </div>
 
-      {/* STYLES ÉDITORIAUX */}
+      {/* STYLES ÉDITORIAUX CORRIGÉS SANS DÉTRUIRE LE O */}
       <style>
         {`
           .journal-article-body {
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
             font-size: 1.125rem;
             line-height: 1.75;
-            color: #E2D5C5;
+            color: #E2D5C5; 
             letter-spacing: -0.005em;
           }
 
@@ -147,20 +147,35 @@ function JournalArticle() {
             text-align: left;
           }
 
-          .journal-article-body p:last-of-type {
-            margin-bottom: 0;
+          /* LE PREMIER PARAGRAPHE GLISSE À GAUCHE SANS CHANGER DE DISPLAY */
+          .journal-article-body p:first-of-type {
+            float: left;
+            margin: 0 0.35rem 0 0; /* Pas de marge en bas pour coller la suite */
+            color: #F3EAE0;
           }
 
+          /* LETTRINE PROTO-STABLE (Le O garde sa forme parfaite) */
           .journal-article-body p:first-of-type::first-letter {
-            float: left;
+            display: inline-block;
             font-family: "Plus Jakarta Sans", sans-serif;
             font-weight: 900;
             color: #F97316;
-            font-size: 3.5rem; 
-            line-height: 0.85; 
-            margin-top: 0.15rem; 
-            margin-right: 0.45rem; 
+            font-size: 3.5rem;
+            line-height: 1; 
+            vertical-align: baseline; 
+            margin-right: 0.25rem; 
             text-shadow: 2px 2px 0px rgba(245, 158, 11, 0.15);
+          }
+
+          /* LE DEUXIÈME PARAGRAPHE S'ENROULE NATURELLEMENT À LA SUITE */
+          .journal-article-body p:first-of-type + p {
+            display: block;
+            margin-bottom: 1.8rem;
+          }
+
+          /* NETTOYAGE : Coupe le float pour que le 3ème paragraphe retourne en dessous normalement */
+          .journal-article-body p:first-of-type + p + p {
+            clear: both;
           }
 
           .journal-article-body h2 {
@@ -173,7 +188,6 @@ function JournalArticle() {
             color: #F8F8F8;
             margin: 4rem 0 1.5rem;
             text-align: left;
-            clear: both;
           }
 
           .journal-article-body h2::before {
@@ -197,7 +211,7 @@ function JournalArticle() {
             padding: 0.5rem 1.5rem;
             border-left: 3px solid #F97316;
             font-style: italic;
-            color: #E2D5C5;
+            color: #F3EAE0;
             text-align: left;
           }
 

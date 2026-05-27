@@ -6,6 +6,7 @@ import Portfolio from './components/Pages/Portfolio';
 import Journal from '../src/components/Pages/Journal'
 import JournalArticle from './components/JournalArticle';
 
+
 function App() {
   return (
     <>

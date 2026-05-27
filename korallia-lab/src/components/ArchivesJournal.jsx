@@ -40,7 +40,7 @@ function ArchivesJournal({ entries = [], loading, error }) {
   }
 
   return (
-    <section className="relative left-1/2 mt-10 mb-32 w-[min(78rem,calc(100vw-12rem))] -translate-x-1/2">
+    <section id="archives" className="relative left-1/2 mt-10 mb-32 w-[min(78rem,calc(100vw-12rem))] -translate-x-1/2">
       <div className="relative border-2 border-[#2A211C] border-t-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.12)]">
         <div className="absolute -right-2 top-2 h-full w-2 bg-[#3A1F0B]/70" />
         <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#3A1F0B]/70" />

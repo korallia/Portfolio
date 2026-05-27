@@ -26,3 +26,6 @@
 .sys-status-pulse {
   animation: sysStatusPulse 2.8s ease-in-out infinite;
 }
+html {
+  scroll-behavior: smooth;
+}
