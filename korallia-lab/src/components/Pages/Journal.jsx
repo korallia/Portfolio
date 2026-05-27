@@ -1,12 +1,37 @@
 import ArchivesJournal from "../archivesJournal";
 import JournalHero from "./JournalHero";
+import { useState, useEffect } from "react";
 const Journal = () => {
   
+const [entries, setEntries] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
 
+useEffect(() => {
+  const loadArchives = async () => {
+    try {
+      const response = await fetch("/api/journal/archive");
+
+      if (!response.ok) {
+        throw new Error("Erreur lors du chargement des archives.");
+      }
+
+      const data = await response.json();
+      setEntries(data);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadArchives();
+}, []);
   return (
     <div className="min-h-screen bg-[#0E0D0C] bg-[linear-gradient(to_right,rgba(36,32,30,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(36,32,30,0.35)_1px,transparent_1px)] bg-[size:4rem_4rem] text-slate-200 font-mono selection:bg-orange-500/30 overflow-x-hidden">    
     <JournalHero/>
-    <ArchivesJournal/>
+   <ArchivesJournal entries={entries} loading={loading} error={error} />
     </div>
   );
 };
