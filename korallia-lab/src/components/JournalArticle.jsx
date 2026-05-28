@@ -76,7 +76,7 @@ function JournalArticle() {
         <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#3A1F0B]/70 pointer-events-none" />
         
         {/* ================= ZONE EN-TÊTE EN DÉGRADÉ PROGRESSIF ================= */}
-        <div className="bg-gradient-to-b from-[#0B0D0F] via-[#0B0D0F] to-[#050607] w-full pb-10 border-b border-[#26221F]/30">
+        <div className="bg-gradient-to-b from-[#0B0D0F] via-[#0B0D0F] to-[#050607] w-full pb-10 border-b border-[#F97316]/25 shadow-[0_1px_0_rgba(249,115,22,0.12)]">
           
           {/* TOP BAR */}
           <div className="relative z-10 px-6 md:px-12 pt-8 pb-6 border-b border-[#26221F]/60 flex flex-wrap items-center justify-between gap-4">
