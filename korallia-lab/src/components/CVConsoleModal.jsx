@@ -1,7 +1,12 @@
 import { useEffect } from "react";
-function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, setIsCvConsoleOpen} ) {
 
-     useEffect(() => {
+function CVConsoleModal({
+  setCvConsoleLines,
+  isCvConsoleOpen,
+  cvConsoleLines,
+  setIsCvConsoleOpen,
+}) {
+  useEffect(() => {
     if (!isCvConsoleOpen) {
       setCvConsoleLines([]);
       return;
@@ -23,11 +28,10 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
     );
 
     return () => timers.forEach(clearTimeout);
-  }, [isCvConsoleOpen]);
+  }, [isCvConsoleOpen, setCvConsoleLines]);
 
-
-    const cvExperiences = 
-    [{
+  const cvExperiences = [
+    {
       company: "Panassor",
       role: "Co-Founder, Secretary & CTO",
       meta: "Remote • Sep 2024 - Present",
@@ -72,30 +76,27 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
       ],
     },
   ];
-    const getStatusBadgeClass = (status) => {
-  switch (status) {
-    case "ACTIVE":
-      return "text-emerald-400 border-emerald-950/60 bg-emerald-950/10";
 
-    case "FREELANCE":
-      return "text-sky-400 border-sky-950/60 bg-sky-950/10";
+  const getStatusBadgeClass = (status) => {
+    switch (status) {
+      case "ACTIVE":
+        return "text-emerald-400 border-emerald-950/60 bg-emerald-950/10";
+      case "FREELANCE":
+        return "text-sky-400 border-sky-950/60 bg-sky-950/10";
+      case "WEB_SYSTEMS":
+        return "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10";
+      case "ENTERPRISE":
+        return "text-violet-300 border-violet-900/70 bg-violet-950/20";
+      default:
+        return "text-slate-400 border-zinc-800 bg-zinc-800/10";
+    }
+  };
 
-    case "WEB_SYSTEMS":
-      return "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10";
-
-    case "ENTERPRISE":
-      return "text-violet-300 border-violet-900/70 bg-violet-950/20";
-
-    default:
-      return "text-slate-400 border-zinc-800 bg-zinc-800/10";
-  }
-};
-    
-    const cvSkillMatrix = [
+  const cvSkillMatrix = [
     {
       label: "FRONT",
       color: "text-fuchsia-400 border-fuchsia-950/60",
-      value: "React.js · Next.js · TailwindCSS · UX structure · responsive UI",
+      value: "React.js · Next.js · TailwindCSS ·",
     },
     {
       label: "BACK",
@@ -105,12 +106,12 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
     {
       label: "SYSTEM",
       color: "text-slate-300 border-zinc-800",
-      value: "Java/JVM · Python · C/C++ · debugging · software maintenance",
+      value: "Java/JVM · Python · C/C++ ·",
     },
     {
       label: "DATA",
       color: "text-amber-500 border-amber-950/60",
-      value: "PostgreSQL · Prisma · MongoDB · data modeling",
+      value: "PostgreSQL · Prisma · MongoDB ·",
     },
   ];
 
@@ -122,202 +123,247 @@ function CVConsoleModal( {setCvConsoleLines,isCvConsoleOpen, cvConsoleLines, set
     },
   ];
 
-
-    const isCvBootDone = cvConsoleLines.some((line) => line.text === "> ready.");
+  const isCvBootDone = cvConsoleLines.some((line) => line.text === "> ready.");
 
   return (
     isCvConsoleOpen && (
-        <div className="fixed inset-0 z-50 bg-[#020304]/95 backdrop-blur-sm p-4 md:p-10 font-mono text-slate-300 overflow-y-auto">
-          <div className="max-w-5xl mx-auto border-2 border-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.18)]">
-            <div className="bg-[#24201E] border-b-2 border-[#F97316] px-4 py-2 flex items-center justify-between text-xs text-[#F59E0B] font-bold">
-              <span>~/korallia-lab $ ./RUN_CV.sh</span>
-          <button
-  onClick={() => setIsCvConsoleOpen(false)}
-  className="text-[12px] text-[#FF6B6B] border border-[#DC2626]/80 bg-[#7F1D1D]/35 px-3 py-1 hover:bg-[#991B1B]/55 hover:border-[#EF4444] hover:text-[#FECACA] transition-all font-bold cursor-pointer select-none shadow-[2px_2px_0px_0px_rgba(127,29,29,0.35)]"
->
-  CLOSE
-</button>
-            </div>
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-[#020304]/95 p-4 text-slate-300 backdrop-blur-sm md:p-10">
+        <div className="mx-auto w-full max-w-5xl border-2 border-[#2A211C] border-t-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.12)]">
+          {/* WINDOW BAR */}
+          <div className="flex items-center justify-between border-b border-[#F97316]/45 bg-[#14100D] px-4 py-2">
+            <span className="font-[JetBrains_Mono] text-[11px] font-bold uppercase tracking-[0.14em] text-[#F59E0B]">
+              ~/korallia-lab $ ./RUN_CV.sh
+            </span>
 
-            <div className="p-6 md:p-8 space-y-2 text-sm min-h-[320px]">
-              {cvConsoleLines.map((line, index) => {
-                if (line.text === "") {
-                  return <div key={index} className="h-3" />;
-                }
-                const isCommand = line.text.includes("korallia-lab:~$");
-                return (
+            <button
+              onClick={() => setIsCvConsoleOpen(false)}
+              className="cursor-pointer select-none border border-[#DC2626]/80 bg-[#7F1D1D]/35 px-3 py-1 font-[JetBrains_Mono] text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF6B6B] shadow-[2px_2px_0px_0px_rgba(127,29,29,0.35)] transition-all hover:border-[#EF4444] hover:bg-[#991B1B]/55 hover:text-[#FECACA]"
+            >
+              Close
+            </button>
+          </div>
+
+          <div className="p-5 md:p-8">
+            {/* BOOT SEQUENCE */}
+            <section className="border border-[#1F1A17] bg-[#050607] p-5 font-[JetBrains_Mono] text-xs">
+              <div className="space-y-2">
+                {cvConsoleLines.map((line, index) => {
+                  if (line.text === "") {
+                    return <div key={index} className="h-3" />;
+                  }
+
+                  const isCommand = line.text.includes("korallia-lab:~$");
+
+                  return (
                     <p
-                    key={index}
-                    className={`${line.color} animate-in fade-in slide-in-from-left-1 duration-200`}
+                      key={index}
+                      className={`${line.color} animate-in fade-in slide-in-from-left-1 duration-200`}
                     >
-                        {isCommand ? (
+                      {isCommand ? (
                         <>
-                            <span className="text-orange-400">korallia-lab:~$</span>{" "}
-                            <span>{line.text.replace("korallia-lab:~$ ", "")}</span>
+                          <span className="text-[#F97316]">korallia-lab:~$</span>{" "}
+                          <span>{line.text.replace("korallia-lab:~$ ", "")}</span>
                         </>
-                        ) : (
+                      ) : (
                         line.text
-                        )}
-                  </p>
-                );
-              })}
+                      )}
+                    </p>
+                  );
+                })}
 
                 {!isCvBootDone && cvConsoleLines.length > 0 && (
-                <span className="inline-block h-4 w-2 bg-green-400 animate-ping shadow-[0_0_10px_#00E676] ml-1" />
-                    )}
-                    {isCvBootDone && (
-                    <div className="mt-6 pt-6 border-t border-[#26221F] space-y-8 animate-in fade-in duration-300">
+                  <span className="ml-1 inline-block h-4 w-2 animate-ping bg-green-400 shadow-[0_0_10px_#00E676]" />
+                )}
+              </div>
+            </section>
 
-                        {/* OUTPUT STATUS */}
-                        <section className="pt-2">
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs">
-                                <div className="space-y-1">
-                                    <p className="text-green-400 font-bold">
-                                    &gt; resume_render_complete
-                                    </p>
-                                    <p className="text-slate-500">
-                                    OUTPUT_STATUS: READY // PROFILE_COMPILED
-                                    </p>
-                                </div>
-                                <button
-                                    className="text-[14px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-2 py-0.5 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)]"
-                                >
-                                    DOWNLOAD_CV.pdf
-                                </button>
-                            </div>
-                        </section>
+            {isCvBootDone && (
+              <div className="mt-8 animate-in fade-in duration-300">
+               {/* OUTPUT STATUS */}
+              <section className="mb-6 border border-[#1F1A17] bg-[#050607] px-5 py-4">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div className="font-[JetBrains_Mono] text-xs">
+                    <p className="font-bold uppercase tracking-[0.16em] text-green-400">
+                      &gt; resume_render_complete
+                    </p>
 
-                    {/* OPERATOR PROFILE */}
-                    <section className="space-y-4">
-                            <h2 className="text-orange-400 font-bold tracking-wide">
-                            [ OPERATOR_PROFILE ]
-                            </h2>
+                    <p className="mt-1 uppercase tracking-[0.14em] text-[#8F7A68]">
+                      OUTPUT_STATUS: READY // PROFILE_COMPILED
+                    </p>
 
-                            <div className="grid md:grid-cols-[140px_1fr] gap-y-2 gap-x-4 text-xs md:text-sm">
-                                <span className="text-slate-500 font-bold">NAME</span>
-                                <span className="text-white">Korallia Frenette</span>
+                    <p className="mt-3 text-[#8F7A68]">
+                      korallia-lab:~${" "}
 
-                                <span className="text-slate-500 font-bold">CORE_STACK</span>
-                                <span className="text-slate-300">Full-Stack Dev // Entrepreneur // Maker</span>
+                      <span className="w-3 h-5 bg-[#00E676] inline-block animate-ping shadow-[0_0_10px_#00E676]"></span>
+                    </p>
+                  </div>
 
-                                <span className="text-slate-500 font-bold">LOCATION</span>
-                                <span className="text-slate-300">Rougemont, Québec, Canada // Remote-ready</span>
+                  <button className="w-fit cursor-pointer border border-[#F59E0B]/40 bg-[#F59E0B]/10 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em] text-[#F59E0B] transition hover:border-[#F97316] hover:bg-[#F97316]/15 hover:text-[#F97316]">
+                    DOWNLOAD_CV.pdf
+                  </button>
+                </div>
+              </section>
 
-                                <span className="text-slate-500 font-bold">LANGUAGES</span>
-                                <span className="text-slate-300">French // English</span>
+                {/* CV OUTPUT */}
+                <div className="border border-[#26221F] bg-[#080A0C]">
+                  {/* OPERATOR PROFILE */}
+                 <section className="border-t-2 border-t-[#F97316] border-b-2 border-b-[#F97316]/45 px-6 py-7 md:px-8">
+                    <p className="mb-5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#F97316]">
+                      [ OPERATOR_PROFILE ]
+                    </p>
 
-                                <span className="text-slate-500 font-bold">TARGET</span>
-                                <span className="text-slate-300">
-                                    Donner vie aux idées créatives et faire tenir les systèmes qui les rendent possibles.
-                                </span>
-                            </div>
+                    <div className="grid gap-6 md:grid-cols-[0.85fr_1.35fr]">
+                      <div>
+                        <h2 className="font-[Plus_Jakarta_Sans] text-3xl font-black uppercase leading-none tracking-[-0.04em] text-white">
+                          Korallia Frenette
+                        </h2>
 
-                            <div className="border-l border-orange-500/40 pl-4 text-slate-400 text-xs md:text-sm leading-relaxed">
-                                Développeuse full-stack avec une approche entrepreneuriale et orientée systèmes.
-                                Je conçois des solutions sur mesure qui relient besoin réel, expérience utilisateur,
-                                logique technique et contraintes opérationnelles.
-                            </div>
-                        </section>
+                        <p className="mt-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em] text-[#F59E0B]">
+                          Full-Stack Dev // Entrepreneur // Maker
+                        </p>
+                      </div>
 
-                    {/* WORK HISTORY */}
-                        <section className="space-y-8">
-                            <h2 className="text-orange-400 font-bold tracking-wide">
-                            [ WORK_HISTORY ]
-                            </h2>
+                      <div>
+                        <p className="font-[Inter] text-sm leading-relaxed text-[#CDB9A5]">
+                          Développeuse full-stack avec une approche entrepreneuriale
+                          et orientée systèmes. Je conçois des solutions sur mesure qui
+                          relient besoin réel, expérience utilisateur, logique technique
+                          et contraintes opérationnelles.
+                        </p>
 
-                            <div className="space-y-8">
-                                {cvExperiences.map((exp, index) => (
-                                    <div
-                                    key={`${exp.company}-${index}`}
-                                    className="animate-in fade-in slide-in-from-bottom-2 duration-300"
-                                    style={{ animationDelay: `${index * 120}ms` }}
-                                    >
-                                        <div className="mb-2">
-                                            <p className="text-white font-bold">
-                                            {exp.company} - {exp.role}
+                        <div className="mt-5 grid gap-4 font-[JetBrains_Mono] text-[11px] uppercase tracking-[0.12em] md:grid-cols-3">
+                          <div>
+                            <p className="text-[#8F7A68]">Location</p>
+                            <p className="text-[#D8C7B8]">
+                              Rougemont, Québec // Remote-ready
+                            </p>
+                          </div>
 
-                                            <span
-                                                className={`ml-2 text-[14px] border px-1.5 py-0.5 font-bold tracking-wide ${getStatusBadgeClass(exp.status)}`}
-                                            >
-                                                {exp.status}
-                                            </span>
-                                            </p>
+                          <div>
+                            <p className="text-[#8F7A68]">Languages</p>
+                            <p className="text-[#D8C7B8]">French // English</p>
+                          </div>
 
-                                            <p className="text-slate-500 italic text-xs">
-                                            {exp.meta}
-                                            </p>
-                                        </div>
+                          <div>
+                            <p className="text-[#8F7A68]">Target</p>
+                            <p className="text-[#D8C7B8]">
+                              Systems that hold
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
 
-                                        <ul className="space-y-2 pl-5 text-slate-300 text-xs md:text-sm leading-relaxed">
-                                            {exp.bullets.map((bullet, bulletIndex) => (
-                                            <li key={bulletIndex} className="relative">
-                                                <span className="absolute -left-4 text-orange-400">•</span>
-                                                {bullet}
-                                            </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
+                {/* WORK HISTORY */}
+<section className="border-b border-[#26221F] px-6 py-7 md:px-8">
+  <div className="divide-y divide-[#1F1A17]">
+    {cvExperiences.map((exp) => (
+      <article
+        key={`${exp.company}-${exp.meta}`}
+        className="grid gap-5 py-6 first:pt-0 last:pb-0 md:grid-cols-[0.9fr_1.6fr]"
+      >
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="font-[Plus_Jakarta_Sans] text-xl font-black uppercase leading-tight tracking-[-0.03em] text-white">
+              {exp.company}
+            </h3>
 
+            <span
+              className={`border px-2 py-0.5 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.12em] ${getStatusBadgeClass(
+                exp.status
+              )}`}
+            >
+              {exp.status}
+            </span>
+          </div>
+
+          <p className="mt-1 font-[Inter] text-sm font-semibold text-[#D8C7B8]">
+            {exp.role}
+          </p>
+
+          <p className="mt-1 font-[JetBrains_Mono] text-[11px] italic uppercase tracking-[0.08em] text-[#8F7A68]">
+            {exp.meta}
+          </p>
+        </div>
+
+        <ul className="space-y-2.5 font-[Inter] text-sm leading-relaxed text-[#CDB9A5]">
+          {exp.bullets.map((bullet, bulletIndex) => (
+            <li key={bulletIndex} className="relative pl-5">
+              <span className="absolute left-0 top-0 text-[#F97316]">
+                ›
+              </span>
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>
+
+                  {/* SKILLS + EDUCATION */}
+                  <section className="grid gap-0 border-t-2 border-t-[#F97316]/35 border-b-2 border-b-[#F97316] md:grid-cols-[1.25fr_0.75fr]">
                     {/* SKILL MATRIX */}
-                        <section className="pt-6 border-t border-[#26221F] space-y-4">
-                            <h2 className="text-orange-400 font-bold tracking-wide">
-                            [ SKILL_MATRIX ]
-                            </h2>
+                    <div className="border-b border-[#26221F] px-6 py-7 md:border-b-0 md:border-r md:px-8">
+                      <p className="mb-5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#F97316]">
+                        [ SKILL_MATRIX ]
+                      </p>
 
-                            <div className="space-y-3 text-xs md:text-sm">
-                            {cvSkillMatrix.map((skill) => (
-                                <div
-                                key={skill.label}
-                                className={`grid md:grid-cols-[110px_1fr] gap-2 border-l pl-3 ${skill.color}`}
-                                >
-                                <span className="font-bold">{skill.label}</span>
-                                <span className="text-slate-400">{skill.value}</span>
-                                </div>
-                            ))}
+                      <div className="space-y-3">
+                        {cvSkillMatrix.map((skill) => (
+                          <div
+                            key={skill.label}
+                            className={`border-l px-3 py-2 ${skill.color}`}
+                          >
+                            <div className="grid gap-1 md:grid-cols-[78px_1fr] md:items-start">
+                              <span className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em]">
+                                {skill.label}
+                              </span>
+
+                              <span className="font-[Inter] text-sm leading-relaxed text-[#CDB9A5]">
+                                {skill.value}
+                              </span>
                             </div>
-                        </section>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
                     {/* EDUCATION */}
-                        <section className="pt-6 border-t border-[#26221F] space-y-4">
-                            <h2 className="text-orange-400 font-bold tracking-wide">
-                            [ EDUCATION ]
-                            </h2>
+                    <div className="px-6 py-7 md:px-8">
+                      <p className="mb-5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#F97316]">
+                        [ EDUCATION ]
+                      </p>
 
-                            <div className="space-y-3 text-xs md:text-sm">
-                            {cvEducation.map((edu) => (
-                                <div key={edu.program} className="border-l border-blue-500/30 pl-3">
-                                <p className="text-white font-bold">
-                                    {edu.program}
-                                </p>
-                                <p className="text-slate-500 italic text-xs">
-                                    {edu.school}
-                                </p>
-                                <p className="text-slate-400 mt-1">
-                                    {edu.meta}
-                                </p>
-                                </div>
-                            ))}
-                            </div>
-                        </section>
+                      {cvEducation.map((edu) => (
+                        <div
+                          key={edu.program}
+                          className="border-l border-sky-500/30 pl-4"
+                        >
+                          <p className="font-[Plus_Jakarta_Sans] text-lg font-black uppercase text-white">
+                            {edu.program}
+                          </p>
 
-                        {/* CONSOLE END */}
-                        <section className="pt-6 border-t border-[#26221F] text-xs space-y-2">
-                            <p className="text-green-400 font-bold">
-                            &gt; process_exit_code: 0
-                            </p>
-                            <p className="text-slate-600 pt-3">
-                            korallia-lab:~${" "}
-                            <span className="inline-block h-3 w-2 bg-green-400 animate-ping shadow-[0_0_10px_#00E676] align-middle" />
-                            </p>
-                        </section>
+                          <p className="mt-1 font-[JetBrains_Mono] text-xs italic text-[#8F7A68]">
+                            {edu.school}
+                          </p>
+
+                          <p className="mt-2 font-[Inter] text-sm leading-relaxed text-[#CDB9A5]">
+                            {edu.meta}
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                    )}
+                  </section>
                 </div>
-            </div>
+              </div>
+            )}
+          </div>
         </div>
-    ))}
+      </div>
+    )
+  );
+}
 
-export default CVConsoleModal
+export default CVConsoleModal;
