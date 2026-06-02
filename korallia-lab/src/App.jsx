@@ -5,6 +5,7 @@ import IntroductionPage from '../src/components/Pages/IntroductionPage'
 import Portfolio from './components/Pages/Portfolio';
 import Journal from '../src/components/Pages/Journal'
 import JournalArticle from './components/JournalArticle';
+import TerminalPage from './components/Pages/terminalPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/" element={<IntroductionPage />} />
       <Route path="whoami" element={<Portfolio />} />
+       <Route path="repertoire" element={<TerminalPage />} />
       <Route path="journal" element={<Journal />} />
         <Route path="/journal/:slug" element={<JournalArticle />} />
     </Routes>
