@@ -172,6 +172,7 @@ useEffect(() => {
   );
 }, [branches, selectedBranchId, project?.default_branch_id]);
 
+
   const branchObjective = selectedBranch?.objective || "";
   const branchObstacle = selectedBranch?.obstacle || "";
   const branchDecision = selectedBranch?.decision || "";
@@ -291,6 +292,46 @@ if (isLoadingProject) {
               </button>
             </div>
           </header>
+            <section className="relative z-10 border-t-2 border-[#3A302A] bg-[#050607]/70 px-8 py-6 md:px-12">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <BlockTitle title="branch_reload" theme={fixedGreenTheme} />
+
+                <p className="mt-2 font-[Inter] text-[15px] leading-7 text-[#8F7A68]">
+                  Changer de branche recharge les informations associées à cette
+                  branche.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+               <div className="w-full md:w-[340px]">
+  <label className="mb-2 block font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#8F7A68]">
+    selected_branch
+  </label>
+
+  <select
+    value={selectedBranchId || ""}
+    onChange={(event) => setSelectedBranchId(event.target.value)}
+    className={`w-full border bg-[#0B0D0F] px-4 py-3 font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] outline-none transition ${branchTheme.active}`}
+  >
+    {branches.map((branch) => {
+      const theme = branchThemes[branch.theme || "green"] || branchThemes.green;
+
+      return (
+        <option
+          key={branch.id}
+          value={String(branch.id)}
+          className="bg-[#0B0D0F] text-[#BBAA9A]"
+        >
+          {branch.label} // {branch.name}
+        </option>
+      );
+    })}
+  </select>
+</div>
+              </div>
+            </div>
+          </section>
 
           {/* SUMMARY + STACK */}
           <div className="relative z-10 grid border-b border-[#26221F]/60 bg-[#050607]/70 md:grid-cols-[1.2fr_0.8fr]">
@@ -406,109 +447,10 @@ if (isLoadingProject) {
           </div>
 
           {/* BRANCH SELECTOR */}
-          <section className="relative z-10 border-t-2 border-[#3A302A] bg-[#050607]/70 px-8 py-6 md:px-12">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <BlockTitle title="branch_reload" theme={fixedGreenTheme} />
+        
 
-                <p className="mt-2 font-[Inter] text-[15px] leading-7 text-[#8F7A68]">
-                  Changer de branche recharge les informations associées à cette
-                  branche.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {branches.map((branch) => {
-                  const active = branch.id === selectedBranch?.id;
-                  const theme =
-                    branchThemes[branch.theme || "green"] ||
-                    branchThemes.green;
-
-                  return (
-                    <div className="w-full md:w-[340px]">
-  <label className="mb-2 block font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#8F7A68]">
-    selected_branch
-  </label>
-
-  <select
-    value={selectedBranchId || ""}
-    onChange={(event) => setSelectedBranchId(event.target.value)}
-    className={`w-full border bg-[#0B0D0F] px-4 py-3 font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] outline-none transition ${branchTheme.active}`}
-  >
-    {branches.map((branch) => {
-      const theme = branchThemes[branch.theme || "green"] || branchThemes.green;
-
-      return (
-        <option
-          key={branch.id}
-          value={String(branch.id)}
-          className="bg-[#0B0D0F] text-[#BBAA9A]"
-        >
-          {branch.label} // {branch.name} // {theme.label}
-        </option>
-      );
-    })}
-  </select>
-</div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* COMMITS */}
-          <section className="relative z-10 border-t-2 border-[#3A302A] bg-[#050607]/70 px-8 py-8 md:px-12">
-            <div className="mb-5 flex items-center justify-between border-b border-[#26221F]/60 pb-3 font-[JetBrains_Mono] text-sm font-bold uppercase tracking-[0.14em]">
-              <span className="text-[#8F7A68]">streaming_commits</span>
-              <span className={branchTheme.text}>
-                {selectedBranch?.name || "no_branch"}
-              </span>
-            </div>
-
-            {branchCommits.length === 0 ? (
-              <div className="border border-[#26221F]/80 bg-[#0B0D0F] px-4 py-4">
-                <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.14em] text-[#8F7A68]">
-                  commits_not_loaded_yet
-                </p>
-              </div>
-            ) : (
-              <div className="divide-y divide-[#26221F]/70">
-                {branchCommits.map((commit) => (
-                  <article
-                    key={commit.hash}
-                    className="grid gap-4 py-5 md:grid-cols-[0.45fr_1.55fr]"
-                  >
-                    <div className="font-[JetBrains_Mono] text-xs">
-                      <p className={branchTheme.text}>commit_{commit.hash}</p>
-                      <p className="mt-1 text-[#8F7A68]">{commit.date}</p>
-                      <p className="mt-3 text-[#A7F3D0]">{commit.stat}</p>
-                    </div>
-
-                    <div>
-                      <h3 className="font-[Plus_Jakarta_Sans] text-2xl font-black uppercase leading-tight tracking-[-0.035em] text-white">
-                        {commit.message}
-                      </h3>
-
-                      <p className="mt-2 font-[JetBrains_Mono] text-xs text-[#8F7A68]">
-                        modified: {commit.files}
-                      </p>
-
-                      <p className="mt-3 font-[Inter] text-[15px] leading-7 text-[#BBAA9A]">
-                        {commit.impact}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-
-            <div className="mt-6 border-t border-[#26221F]/60 pt-5 font-[JetBrains_Mono] text-xs">
-              <span className="font-bold text-[#00E676]">
-                korallia-lab@system:~$
-              </span>
-              <span className="ml-2 inline-block h-5 w-3 animate-pulse bg-[#00E676] align-middle shadow-[0_0_10px_#00E676]" />
-            </div>
-          </section>
+    
+          
         </div>
       </section>
     </main>
