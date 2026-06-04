@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const skillStyles = [
   {
@@ -26,16 +26,15 @@ const skillStyles = [
 const techStyles = {
   React: skillStyles[0].node,
   "Next.js": skillStyles[0].node,
-  Tailwind: skillStyles[0].node,
   TailwindCSS: skillStyles[0].node,
   "Framer Motion": skillStyles[0].node,
 
   "Node.js": skillStyles[1].node,
   TypeScript: skillStyles[1].node,
+  "Git CLI": skillStyles[1].node,
   "Python/Flask": skillStyles[1].node,
   "PHP/Laravel": skillStyles[1].node,
   "Java/Spring Boot": skillStyles[1].node,
-  "Git CLI": skillStyles[1].node,
 
   "Java/JVM": skillStyles[2].node,
   Python: skillStyles[2].node,
@@ -56,32 +55,52 @@ const statusStyles = {
   ACTIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
   STABLE: "border-[#00E676]/60 bg-[#00E676]/5 text-[#A7F3D0]",
   LIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+  WIP: "border-[#00E676]/45 bg-[#00E676]/5 text-[#A7F3D0]",
 };
 
 const projects = [
   {
     id: "custom-git-manager",
     name: "custom_git_manager",
-    title: "Custom Git Manager",
     category: "Fullstack",
     status: "ACTIVE",
     path: "~/repos/custom_git_manager",
     branch: "main_branch",
-    command: "open custom_git_manager --summary",
     description:
       "Interface maison pour transformer l’activité Git brute en résumé technique lisible : branches, commits, décisions et impact système.",
+    summary:
+      "Ce projet explore comment transformer des informations techniques très détaillées en une vue claire, lisible et utile autant pour des développeurs que pour des recruteurs.",
     objective:
       "Créer une vue exécutive de l’activité Git sans répliquer toute la granularité brute de GitHub.",
     obstacle:
-      "Git contient énormément d’information utile, mais cette richesse devient difficile à lire rapidement pour des recruteurs, RH ou profils non techniques.",
+      "Git contient beaucoup d’information utile, mais cette richesse devient difficile à lire rapidement pour des profils non techniques.",
     decision:
       "Extraire les signaux importants : branche active, commits récents, intention du changement, fichiers touchés et impact technique.",
-    output:
+    result:
       "Une interface qui raconte l’évolution d’un projet sans remplacer GitHub ni exposer tout le diff brut.",
-    impact:
-      "Le projet permet de présenter une logique de développement claire, orientée produit, architecture et communication technique.",
     stack: ["React", "TypeScript", "Node.js", "Git CLI", "TailwindCSS"],
-    modules: ["repo_index", "commit_stream", "diff_parser", "summary_renderer"],
+    modules: [
+      {
+        name: "repo_index",
+        description:
+          "Liste les projets actifs et expose leur statut, leur catégorie et leur rôle dans le système.",
+      },
+      {
+        name: "commit_stream",
+        description:
+          "Transforme les commits récents en événements lisibles avec date, fichiers touchés et impact.",
+      },
+      {
+        name: "summary_renderer",
+        description:
+          "Présente les décisions techniques sous forme de résumé exécutif plutôt que de diff brut.",
+      },
+    ],
+    nextSteps: [
+      "Ajouter une vraie lecture des branches Git.",
+      "Créer un résumé non technique pour recruteurs.",
+      "Afficher les commits par intention technique.",
+    ],
     commits: [
       {
         hash: "fa89c",
@@ -108,35 +127,49 @@ const projects = [
         impact: "Pose les conventions de base du système.",
       },
     ],
-    nextSteps: [
-      "Ajouter une vue par branche.",
-      "Créer un résumé non technique pour recruteurs.",
-      "Afficher les commits par intention technique.",
-    ],
   },
   {
     id: "journal-system",
     name: "journal_system",
-    title: "Journal System",
     category: "Architecture",
     status: "STABLE",
     path: "~/repos/journal_system",
     branch: "creative_core_active",
-    command: "open journal_system --archive",
     description:
       "Système de journal technique avec archives, articles complets, rendu SQL et navigation ancrée.",
+    summary:
+      "Une section éditoriale technique pensée pour accueillir des textes longs, des images, des réflexions de structure et des décisions d’architecture.",
     objective:
-      "Créer un espace éditorial technique capable d’accueillir des textes longs, des images et des réflexions d’architecture.",
+      "Créer un espace journal lisible, connecté à une base de données, sans tomber dans un CMS trop lourd.",
     obstacle:
       "Préserver une esthétique forte sans nuire à la lisibilité des articles.",
     decision:
-      "Séparer archive, article, API et contenu HTML pour garder une architecture simple, lisible et maintenable.",
-    output:
+      "Séparer l’archive, la page article, l’API et le contenu HTML pour garder une architecture simple et maintenable.",
+    result:
       "Un journal stylisé, connecté à une base de données et prêt à recevoir du contenu long.",
-    impact:
-      "Le système transforme le portfolio en espace narratif vivant plutôt qu’en simple liste de projets.",
     stack: ["React", "PostgreSQL", "Prisma", "TailwindCSS"],
-    modules: ["archive_index", "article_renderer", "journal_api", "content_model"],
+    modules: [
+      {
+        name: "archive_index",
+        description:
+          "Affiche les entrées récentes sous forme de liste lisible et navigable.",
+      },
+      {
+        name: "article_renderer",
+        description:
+          "Rend les articles complets avec typographie, blockquotes, images et texte long.",
+      },
+      {
+        name: "journal_api",
+        description:
+          "Expose les routes nécessaires pour charger les archives et les articles individuels.",
+      },
+    ],
+    nextSteps: [
+      "Ajouter un système de tags plus riche.",
+      "Prévoir une interface admin légère.",
+      "Ajouter une meilleure prévisualisation du contenu HTML.",
+    ],
     commits: [
       {
         hash: "ac18d",
@@ -155,35 +188,49 @@ const projects = [
         impact: "Charge les entrées depuis la base de données.",
       },
     ],
-    nextSteps: [
-      "Ajouter un système de tags plus riche.",
-      "Créer une interface admin pour publier les articles.",
-      "Ajouter une prévisualisation markdown/html.",
-    ],
   },
   {
     id: "cv-console-render",
     name: "cv_console_render",
-    title: "CV Console Render",
     category: "Infrastructure",
     status: "LIVE",
     path: "~/repos/cv_console_render",
     branch: "profile_output",
-    command: "open cv_console_render --profile",
     description:
       "CV rendu dans une interface terminal : séquence de boot, profil professionnel et logique de compétences.",
+    summary:
+      "Un composant qui utilise l’esthétique terminal comme cadre narratif, mais présente ensuite le CV comme un document structuré et lisible.",
     objective:
       "Créer une présentation mémorable sans sacrifier la lecture pour les recruteurs.",
     obstacle:
       "L’esthétique terminal peut rapidement devenir massive, dense et difficile à lire.",
     decision:
-      "Garder le terminal comme cadre narratif, puis présenter le contenu comme un vrai document structuré.",
-    output:
+      "Garder le terminal comme effet d’entrée, puis structurer le contenu avec des sections claires et des lignes de séparation.",
+    result:
       "Un CV interactif avec identité technique forte, mais assez clair pour être lu par des profils RH.",
-    impact:
-      "Le composant sert de pont entre identité visuelle, storytelling technique et présentation professionnelle.",
     stack: ["React", "TailwindCSS", "Framer Motion"],
-    modules: ["boot_sequence", "profile_panel", "work_history", "skill_matrix"],
+    modules: [
+      {
+        name: "boot_sequence",
+        description:
+          "Anime l’ouverture du CV comme une commande exécutée dans un terminal.",
+      },
+      {
+        name: "profile_panel",
+        description:
+          "Présente le profil, les informations clés et le positionnement professionnel.",
+      },
+      {
+        name: "skill_matrix",
+        description:
+          "Organise les compétences par familles : front, back, système et data.",
+      },
+    ],
+    nextSteps: [
+      "Créer une version PDF harmonisée.",
+      "Connecter les projets du CV au répertoire.",
+      "Ajouter une animation de boot plus subtile.",
+    ],
     commits: [
       {
         hash: "e31cd",
@@ -202,116 +249,121 @@ const projects = [
         impact: "Clarifie la hiérarchie entre profil, expérience et compétences.",
       },
     ],
-    nextSteps: [
-      "Créer une version PDF harmonisée.",
-      "Ajouter une animation de boot plus subtile.",
-      "Connecter les projets du CV au répertoire.",
-    ],
   },
 ];
 
-function ProjectDetail() {
+function ProjectDetailPage() {
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   const project = projects.find((item) => item.id === projectId);
 
   if (!project) {
     return (
-      <main className="min-h-screen bg-[#07080a] bg-[linear-gradient(to_right,#141612_1px,transparent_1px),linear-gradient(to_bottom,#141612_1px,transparent_1px)] bg-[size:2rem_2rem] px-4 py-20 text-slate-300 md:px-16">
-        <section className="mx-auto max-w-3xl border border-[#26221F] border-t-2 border-t-[#00E676] bg-[#0B0D0F] p-8 shadow-[8px_8px_0px_0px_rgba(0,230,118,0.10)]">
-          <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#00E676]">
-            [ error_404 ]
-          </p>
+      <main className="min-h-screen w-full bg-[#050607] px-4 py-16 text-slate-300 md:px-12">
+        <section className="relative left-1/2 w-full max-w-4xl -translate-x-1/2">
+          <div className="relative border-2 border-[#2A211C] border-t-[#00E676] bg-[#0B0D0F] p-8 shadow-[8px_8px_0px_0px_rgba(0,80,45,0.22)]">
+            <div className="absolute -right-2 top-2 h-full w-2 bg-[#062818]/70" />
+            <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#062818]/70" />
 
-          <h1 className="mt-4 font-[Plus_Jakarta_Sans] text-4xl font-black uppercase text-white">
-            Project not found.
-          </h1>
+            <div className="relative z-10">
+              <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#00E676]">
+                [ error_404 ]
+              </p>
 
-          <Link
-            to="/repertoire"
-            className="mt-8 inline-block border border-[#00E676]/45 bg-[#00E676]/5 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#00E676] transition hover:bg-[#00E676]/10"
-          >
-            ← back_to_index
-          </Link>
+              <h1 className="mt-4 font-[Plus_Jakarta_Sans] text-4xl font-black uppercase text-white">
+                Project not found.
+              </h1>
+
+              <button
+                onClick={() => navigate("/repertoire")}
+                className="mt-8 border border-[#00E676]/45 bg-[#00E676]/5 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#00E676] transition hover:bg-[#00E676]/10"
+              >
+                ← back_to_index
+              </button>
+            </div>
+          </div>
         </section>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen w-full bg-[#07080a] bg-[linear-gradient(to_right,#141612_1px,transparent_1px),linear-gradient(to_bottom,#141612_1px,transparent_1px)] bg-[size:2rem_2rem] px-4 py-16 text-slate-300 selection:bg-[#00E676]/30 md:px-16">
-      <div className="mx-auto max-w-6xl">
-        {/* TOP STATUS BAR */}
-        <section className="mb-8 border-2 border-[#00E676] bg-[#0B0D0F] px-5 py-4 shadow-[8px_8px_0px_0px_rgba(0,230,118,0.12)]">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-3 font-[JetBrains_Mono]">
-              <span className="h-4 w-4 bg-[#00E676] shadow-[0_0_16px_#00E676]" />
-              <span className="text-sm font-black uppercase tracking-[0.18em] text-[#00E676]">
-                ⚡ PROJECT_DETAIL::ACTIVE
-              </span>
+    <main className="min-h-screen w-full bg-[#050607] px-4 py-16 text-slate-300 selection:bg-[#00E676]/30 md:px-12">
+      <section className="relative left-1/2 w-full max-w-6xl -translate-x-1/2">
+        <div className="relative border-2 border-[#2A211C] border-t-[#00E676] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(0,80,45,0.22)]">
+          <div className="absolute -right-2 top-2 h-full w-2 bg-[#062818]/70" />
+          <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#062818]/70" />
+
+          {/* TOP BAR */}
+          <div className="relative z-10 flex items-center justify-between border-b border-[#26221F]/60 bg-[#0B0D0F] px-8 py-4 font-[JetBrains_Mono] text-[11px] font-bold uppercase tracking-[0.16em] md:px-12">
+            <div className="flex items-center gap-3 text-[#00E676]">
+              <span className="h-3 w-3 bg-[#00E676] shadow-[0_0_14px_#00E676]" />
+              <span>project_detail</span>
             </div>
 
-            <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.18em] text-[#00E676]/70">
-              CORE_LOAD: {project.status}
-            </p>
+            <span
+              className={`border px-2 py-1 text-[10px] font-black uppercase tracking-[0.12em] ${
+                statusStyles[project.status] || statusStyles.ACTIVE
+              }`}
+            >
+              stage: {project.status}
+            </span>
           </div>
-        </section>
 
-        {/* MAIN WINDOW */}
-        <section className="border border-[#26221F] border-t-2 border-t-[#00E676] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(0,230,118,0.10)]">
           {/* HEADER */}
-          <div className="border-b border-[#26221F] px-6 py-7 md:px-8">
-            <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="mb-4 font-[JetBrains_Mono] text-[11px] font-bold uppercase tracking-[0.2em] text-[#00E676]">
-                  [ repository_detail ]
-                </p>
+          <header className="relative z-10 border-b border-[#26221F]/60 bg-[#0B0D0F] px-8 pb-9 pt-10 md:px-12">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+              <div className="max-w-4xl">
+                <div className="mb-5 flex items-center gap-2 font-[JetBrains_Mono] text-xs uppercase tracking-widest text-[#00E676]">
+                  <span>[ repository_detail ]</span>
+                </div>
 
-                <h1 className="font-[Plus_Jakarta_Sans] text-4xl font-black uppercase leading-none tracking-[-0.055em] text-white md:text-6xl">
-                  {project.name}
+                <h1 className="font-[Plus_Jakarta_Sans] text-4xl font-black uppercase leading-none tracking-[0.12em] text-[#E8EFEA] md:text-5xl">
+                  {project.name.replaceAll("_", " ")}
                   <span className="text-[#00E676]">_</span>
                 </h1>
 
                 <p className="mt-4 font-[JetBrains_Mono] text-[11px] uppercase tracking-[0.16em] text-[#8F7A68]">
                   {project.path} // {project.branch}
                 </p>
+
+              
               </div>
 
-              <Link
-                to="/repertoire"
+              <button
+                onClick={() => navigate("/repertoire")}
                 className="w-fit border border-[#00E676]/45 bg-[#00E676]/5 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#00E676] transition hover:bg-[#00E676]/10"
               >
                 ← back_to_index
-              </Link>
+              </button>
             </div>
-          </div>
+          </header>
 
-          {/* SUMMARY */}
-          <div className="grid border-b border-[#26221F] md:grid-cols-[0.9fr_1.1fr]">
-            <section className="border-b border-[#26221F] px-6 py-7 md:border-b-0 md:border-r md:px-8">
+          {/* SUMMARY + STACK */}
+          <div className="relative z-10 grid border-b border-[#26221F]/60 bg-[#050607]/70 md:grid-cols-[1.15fr_0.85fr]">
+            <section className="border-b border-[#26221F]/60 px-8 py-8 md:border-b-0 md:border-r md:px-12">
               <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
                 project_summary
               </p>
 
-              <p className="font-[Inter] text-sm leading-relaxed text-slate-400">
-                {project.description}
+              <p className="font-[Inter] text-[15px] leading-7 text-[#BBAA9A]">
+                {project.summary}
+              </p>
+            </section>
+
+            <section className="px-8 py-8 md:px-12">
+              <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
+                stack_index
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 <span
                   className={`border px-2 py-1 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.12em] ${
                     categoryStyles[project.category] || skillStyles[2].node
                   }`}
                 >
                   {project.category}
-                </span>
-
-                <span
-                  className={`border px-2 py-1 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.12em] ${
-                    statusStyles[project.status]
-                  }`}
-                >
-                  {project.status}
                 </span>
 
                 {project.stack.map((tech) => (
@@ -326,24 +378,11 @@ function ProjectDetail() {
                 ))}
               </div>
             </section>
-
-            <section className="px-6 py-7 md:px-8">
-              <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                command_output
-              </p>
-
-              <div className="border border-[#26221F] bg-[#050607]/65 p-4 font-[JetBrains_Mono] text-xs leading-relaxed">
-                <p className="text-[#00E676]">korallia-lab@system:~$</p>
-                <p className="mt-1 text-slate-400">{project.command}</p>
-                <p className="mt-4 text-[#00E676]">output_status: ready</p>
-                <p className="text-slate-600">render_mode: executive_summary</p>
-              </div>
-            </section>
           </div>
 
           {/* CORE ANALYSIS */}
-          <div className="grid border-b border-[#26221F] md:grid-cols-3">
-            <InfoBlock title="objective" text={project.objective} />
+          <div className="relative z-10 grid border-b border-[#26221F]/60 bg-[#050607]/70 md:grid-cols-3">
+            <InfoBlock title="objective" text={project.objective} className= "border border-[#26221F]/80 bg-[#0B0D0F] p-4"/>
 
             <InfoBlock
               title="technical_obstacle"
@@ -351,47 +390,82 @@ function ProjectDetail() {
               highlight
             />
 
-            <InfoBlock title="architecture_decision" text={project.decision} />
+            <InfoBlock
+              title="architecture_decision"
+              text={project.decision}
+            />
           </div>
 
-          {/* MODULES + OUTPUT */}
-          <div className="grid border-b border-[#26221F] md:grid-cols-[0.9fr_1.1fr]">
-            <section className="border-b border-[#26221F] px-6 py-7 md:border-b-0 md:border-r md:px-8">
-              <p className="mb-5 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
+          {/* MODULES TOUCHED */}
+          <section className="relative z-10 border-b border-[#26221F]/60 bg-[#050607]/70 px-8 py-8 md:px-12">
+            <div className="mb-6">
+              <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
                 modules_touched
               </p>
 
-              <div className="grid gap-2">
-                {project.modules.map((module) => (
-                  <div
-                    key={module}
-                    className="border border-[#26221F] bg-[#050607]/65 px-3 py-2 font-[JetBrains_Mono] text-xs text-slate-500"
-                  >
-                    /src/{module}
-                  </div>
-                ))}
-              </div>
+              <p className="mt-2 max-w-2xl font-[Inter] text-[14px] leading-6 text-[#8F7A68]">
+                Les modules ci-dessous représentent les parties du système qui
+                portent la logique principale du projet.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {project.modules.map((module) => (
+                <article
+                  key={module.name}
+                  className="border border-[#26221F]/80 bg-[#0B0D0F] p-4"
+                >
+                  <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#00E676]">
+                    /src/{module.name}
+                  </p>
+
+                  <p className="mt-3 font-[Inter] text-sm leading-6 text-[#BBAA9A]">
+                    {module.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* RESULT + NEXT STEPS */}
+          <div className="relative z-10 grid border-b border-[#26221F]/60 bg-[#050607]/70 md:grid-cols-[1fr_1fr]">
+            <section className="border-b border-[#26221F]/60 px-8 py-8 md:border-b-0 md:border-r md:px-12">
+              <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
+                result_impact
+              </p>
+
+              <p className="font-[Inter] text-[15px] leading-7 text-[#BBAA9A]">
+                {project.result}
+              </p>
             </section>
 
-            <section className="px-6 py-7 md:px-8">
+            <section className="px-8 py-8 md:px-12">
               <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                system_output
+                next_steps
               </p>
 
-              <p className="font-[Inter] text-sm leading-relaxed text-slate-400">
-                {project.output}
-              </p>
+              <div className="space-y-3">
+                {project.nextSteps.map((step) => (
+                  <p
+                    key={step}
+                    className="font-[Inter] text-[15px] leading-7 text-[#BBAA9A]"
+                  >
+                    <span className="mr-2 text-[#00E676]">›</span>
+                    {step}
+                  </p>
+                ))}
+              </div>
             </section>
           </div>
 
           {/* COMMITS */}
-          <section className="border-b border-[#26221F] px-6 py-7 md:px-8">
-            <div className="mb-5 flex items-center justify-between border-b border-[#26221F] pb-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em]">
-              <span className="text-slate-500">streaming_commits</span>
+          <section className="relative z-10 bg-[#050607]/70 px-8 py-8 md:px-12">
+            <div className="mb-5 flex items-center justify-between border-b border-[#26221F]/60 pb-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em]">
+              <span className="text-[#8F7A68]">streaming_commits</span>
               <span className="text-[#00E676]">{project.branch}</span>
             </div>
 
-            <div className="divide-y divide-[#26221F]">
+            <div className="divide-y divide-[#26221F]/70">
               {project.commits.map((commit) => (
                 <article
                   key={commit.hash}
@@ -399,7 +473,7 @@ function ProjectDetail() {
                 >
                   <div className="font-[JetBrains_Mono] text-xs">
                     <p className="text-[#00E676]">commit_{commit.hash}</p>
-                    <p className="mt-1 text-slate-600">{commit.date}</p>
+                    <p className="mt-1 text-[#8F7A68]">{commit.date}</p>
                     <p className="mt-3 text-[#A7F3D0]">{commit.stat}</p>
                   </div>
 
@@ -412,79 +486,57 @@ function ProjectDetail() {
                       modified: {commit.files}
                     </p>
 
-                    <p className="mt-3 font-[Inter] text-sm leading-relaxed text-slate-400">
+                    <p className="mt-3 font-[Inter] text-sm leading-6 text-[#BBAA9A]">
                       {commit.impact}
                     </p>
                   </div>
                 </article>
               ))}
             </div>
+
+            <div className="mt-6 border-t border-[#26221F]/60 pt-5 font-[JetBrains_Mono] text-xs">
+              <span className="font-bold text-[#00E676]">
+                korallia-lab@system:~$
+              </span>
+              <span className="ml-2 inline-block h-5 w-3 animate-pulse bg-[#00E676] align-middle shadow-[0_0_10px_#00E676]" />
+            </div>
           </section>
-
-          {/* IMPACT + NEXT STEPS */}
-          <div className="grid md:grid-cols-[1fr_1fr]">
-            <section className="border-b border-[#26221F] px-6 py-7 md:border-b-0 md:border-r md:px-8">
-              <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                result_impact
-              </p>
-
-              <p className="font-[Inter] text-sm leading-relaxed text-slate-400">
-                {project.impact}
-              </p>
-            </section>
-
-            <section className="px-6 py-7 md:px-8">
-              <p className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                next_steps
-              </p>
-
-              <div className="space-y-3">
-                {project.nextSteps.map((step) => (
-                  <p
-                    key={step}
-                    className="font-[Inter] text-sm leading-relaxed text-slate-400"
-                  >
-                    <span className="mr-2 text-[#00E676]">›</span>
-                    {step}
-                  </p>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          {/* PROMPT */}
-          <div className="border-t border-[#26221F] bg-[#0B0D0F] px-6 py-5 font-[JetBrains_Mono] text-xs md:px-8">
-            <span className="font-bold text-[#00E676]">
-              korallia-lab@system:~$
-            </span>
-            <span className="ml-2 inline-block h-5 w-3 animate-pulse bg-[#00E676] align-middle shadow-[0_0_10px_#00E676]" />
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }
 
 function InfoBlock({ title, text, highlight = false }) {
-  return (
-    <section className="border-b border-[#26221F] px-6 py-7 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 md:px-8">
-      <p className="mb-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
-        {title}
-      </p>
+  if (highlight) {
+    return (
+      <section className="border-b border-[#26221F]/60 px-8 py-8 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 md:px-12">
+        <p className="mb-3 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.16em] text-[#00E676]">
+          {title}
+        </p>
 
-      <div
-        className={
-          highlight
-            ? "border-l-2 border-[#00E676] bg-[#00E676]/5 px-4 py-3"
-            : ""
-        }
-      >
-        <p className="font-[Inter] text-sm leading-relaxed text-slate-400">
+        <div className="border-l-2 border-[#00E676] bg-[#00E676]/5 px-4 py-3">
+          <p className="font-[Inter] text-[15px] leading-7 text-[#BBAA9A]">
+            {text}
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="border-b border-[#26221F]/60 px-8 py-8 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 md:px-12">
+      <article className="h-full border border-[#26221F]/80 bg-[#0B0D0F] p-4">
+        <p className="font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#00E676]">
+          {title}
+        </p>
+
+        <p className="mt-3 font-[Inter] text-sm leading-6 text-[#BBAA9A]">
           {text}
         </p>
-      </div>
+      </article>
     </section>
   );
 }
 
-export default ProjectDetail;
+export default ProjectDetailPage;
