@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 
 // Données placeholders — à remplacer plus tard par ton backend/API
 const repositories = [
@@ -188,7 +188,7 @@ const statusStyles = {
 };
 
 export default function TerminalPage() {
-
+  const navigate = useNavigate();
 
 
   return (
@@ -225,6 +225,7 @@ export default function TerminalPage() {
           <div className="relative z-10 bg-[#050607]/70 pb-2">
             {repositories.map((repo, index) => (
               <article
+                onClick={() => navigate(`/repertoire/${repo.id}`)}
                 key={repo.id}
                 className="group grid grid-cols-1 gap-5 border-b border-[#1F1A17]/90 px-8 py-11 transition-all duration-200 hover:bg-[#12100E]/95 hover:shadow-[inset_3px_0_0_#00E676] md:grid-cols-12 md:px-12"
               >

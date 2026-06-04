@@ -6,6 +6,7 @@ import Portfolio from './components/Pages/Portfolio';
 import Journal from '../src/components/Pages/Journal'
 import JournalArticle from './components/JournalArticle';
 import TerminalPage from './components/Pages/terminalPage';
+import ProjectDetail from './components/ProjectDetail';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
        <Route path="repertoire" element={<TerminalPage />} />
       <Route path="journal" element={<Journal />} />
         <Route path="/journal/:slug" element={<JournalArticle />} />
+        <Route path="repertoire/:projectId" element={<ProjectDetail/>} />
     </Routes>
     </main>
     </>
