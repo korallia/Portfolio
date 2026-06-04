@@ -3,6 +3,7 @@ import process from "node:process";
 import cors from "cors";
 import dotenv from "dotenv";
 import journalRoutes from "./routes/journal.js";
+import projectsRouter from "./routes/projects.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/journal", journalRoutes);
+app.use("/api/projects", projectsRouter);
 
 const PORT = process.env.PORT || 3001;
 

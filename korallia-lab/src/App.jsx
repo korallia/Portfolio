@@ -20,7 +20,7 @@ function App() {
        <Route path="repertoire" element={<TerminalPage />} />
       <Route path="journal" element={<Journal />} />
         <Route path="/journal/:slug" element={<JournalArticle />} />
-        <Route path="repertoire/:projectId" element={<ProjectDetail/>} />
+        <Route path="/repertoire/:slug" element={<ProjectDetail/>} />
     </Routes>
     </main>
     </>
