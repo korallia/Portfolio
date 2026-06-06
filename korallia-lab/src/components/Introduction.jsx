@@ -4,6 +4,8 @@ function Introduction() {
   return (
               <section  onClick={() => navigate("/whoami")} 
               className="min-h-[calc(100vh-5rem)] w-full bg-[#0E0D0C] flex items-center justify-center p-4 md:p-12 relative overflow-hidden">
+
+         
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-[0.35] pointer-events-none"></div>
 
           <div className="max-w-5xl w-full border-4 border-[#F97316] bg-[#0B0D0F] p-8 md:p-16 shadow-[8px_8px_0px_0px_rgba(249,115,22,0.15)] relative z-10">
