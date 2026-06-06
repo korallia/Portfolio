@@ -292,7 +292,7 @@ if (isLoadingProject) {
               </button>
             </div>
           </header>
-            <section className="relative z-10 border-t-2 border-[#3A302A] bg-[#050607]/70 px-8 py-6 md:px-12">
+            <section className="relative z-10  border-t-2 border-[#3A302A] bg-[#050607]/70 px-8 py-6 md:px-12 grid border-b border-[#26221F]/60    ">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <BlockTitle title="branch_reload" theme={fixedGreenTheme} />
@@ -305,31 +305,31 @@ if (isLoadingProject) {
 
               <div className="flex flex-wrap gap-2">
                <div className="w-full md:w-[340px]">
-  <label className="mb-2 block font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#8F7A68]">
-    selected_branch
-  </label>
+                <label className="mb-2 block font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#8F7A68] ">
+                  selected_branch
+                </label>
 
-  <select
-    value={selectedBranchId || ""}
-    onChange={(event) => setSelectedBranchId(event.target.value)}
-    className={`w-full border bg-[#0B0D0F] px-4 py-3 font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] outline-none transition ${branchTheme.active}`}
-  >
-    {branches.map((branch) => {
-      const theme = branchThemes[branch.theme || "green"] || branchThemes.green;
+                <select
+                  value={selectedBranchId || ""}
+                  onChange={(event) => setSelectedBranchId(event.target.value)}
+                  className={`w-full border bg-[#0B0D0F] px-4 py-3 font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] outline-none transition ${branchTheme.active}`}
+                >
+                  {branches.map((branch) => {
+                    const theme = branchThemes[branch.theme || "green"] || branchThemes.green;
 
-      return (
-        <option
-          key={branch.id}
-          value={String(branch.id)}
-          className="bg-[#0B0D0F] text-[#BBAA9A]"
-        >
-          {branch.label} // {branch.name}
-        </option>
-      );
-    })}
-  </select>
-</div>
+                    return (
+                      <option
+                        key={branch.id}
+                        value={String(branch.id)}
+                        className="bg-[#0B0D0F] text-[#BBAA9A]"
+                      >
+                        {branch.label} // {branch.name}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
+            </div>
             </div>
           </section>
 
