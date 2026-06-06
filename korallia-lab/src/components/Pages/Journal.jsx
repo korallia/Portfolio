@@ -9,18 +9,7 @@ const [entries, setEntries] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const location = useLocation();
-useEffect(() => {
-    // Vérifie si on a une ancre dans l'URL (ex: #archives-section)
-    if (window.location.hash) {
-      const element = document.getElementById(window.location.hash.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Sinon, scroll en haut par défaut
-      window.scrollTo(0, 0);
-    }
-  }, []);
+
 
 useEffect(() => {
   const loadArchives = async () => {

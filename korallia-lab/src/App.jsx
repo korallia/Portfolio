@@ -7,11 +7,13 @@ import Journal from '../src/components/Pages/Journal'
 import JournalArticle from './components/JournalArticle';
 import TerminalPage from './components/Pages/terminalPage';
 import ProjectDetail from './components/ProjectDetail';
+import RouteReset from "./components/RouteReset";
 
 
 function App() {
   return (
     <>
+      <RouteReset />
     <Navbar />
      <main className="pt-20">
     <Routes>
