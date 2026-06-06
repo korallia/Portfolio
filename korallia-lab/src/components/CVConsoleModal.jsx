@@ -198,9 +198,27 @@ function CVConsoleModal({
                     </p>
                   </div>
 
-                  <button className="w-fit cursor-pointer border border-[#F59E0B]/40 bg-[#F59E0B]/10 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.12em] text-[#F59E0B] transition hover:border-[#F97316] hover:bg-[#F97316]/15 hover:text-[#F97316]">
-                    DOWNLOAD_CV.pdf
-                  </button>
+                  <div className="flex flex-wrap gap-3">
+    <a
+    href="/Korallia_Frenette_Resume.pdf"
+    target="_blank"
+    rel="noreferrer"
+    className="border border-[#B45309]/70 bg-[#B45309]/10 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#F59E0B] transition hover:bg-[#B45309]/20"
+  >
+    OPEN_CV
+  </a>
+  
+  
+  <a
+    href="/Korallia_Frenette_Resume.pdf"
+    download="Korallia_Frenette_Resume.pdf"
+    className="border border-[#B45309]/70 bg-[#B45309]/10 px-4 py-2 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-[0.14em] text-[#F59E0B] transition hover:bg-[#B45309]/20"
+  >
+    DOWNLOAD_CV
+  </a>
+
+
+</div>
                 </div>
               </section>
 

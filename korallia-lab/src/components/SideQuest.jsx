@@ -30,7 +30,7 @@ function SideQuest() {
           >
             <div className="absolute left-0 top-0 h-full w-[2px] bg-fuchsia-400/20 transition-all duration-200 group-hover:bg-fuchsia-400/40" />
 
-            <p className="text-fuchsia-400/65 font-bold tracking-wide mb-1.5 transition-colors duration-200 group-hover:text-fuchsia-400/90">
+            <p className="text-fuchsia-300/65 font-bold tracking-wide mb-1.5 transition-colors duration-200 group-hover:text-fuchsia-400">
               ○ {quest.title}
             </p>
 
