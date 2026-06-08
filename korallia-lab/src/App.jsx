@@ -1,5 +1,6 @@
 import '/index.css'
 import Navbar from "./components/Navbar";
+import Footer from './components/Footer';
 import { Routes, Route } from "react-router-dom";
 import IntroductionPage from '../src/components/Pages/IntroductionPage'
 import Portfolio from './components/Pages/Portfolio';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/repertoire/:slug" element={<ProjectDetail/>} />
     </Routes>
     </main>
+     <Footer />
     </>
   )
 }
