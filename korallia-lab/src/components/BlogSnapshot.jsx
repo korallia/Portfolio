@@ -1,5 +1,55 @@
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 function BlogSnapshot() {
+   const navigate = useNavigate();
+
+  const [latestArticle, setLatestArticle] = useState(null);
+  const [isLoadingArticle, setIsLoadingArticle] = useState(true);
+  const [articleError, setArticleError] = useState(null);
+
+  useEffect(() => {
+    const loadLatestArticle = async () => {
+      try {
+        setIsLoadingArticle(true);
+        setArticleError(null);
+
+        const response = await fetch("/api/journal");
+
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement du dernier article.");
+        }
+
+        const data = await response.json();
+
+        setLatestArticle(data?.[0] || null);
+      } catch (err) {
+        console.error(err);
+        setArticleError(err.message);
+      } finally {
+        setIsLoadingArticle(false);
+      }
+    };
+
+    loadLatestArticle();
+  }, []);
+if (isLoadingArticle) {
+    return (
+      <section className="border border-[#26221F]/80 bg-[#0B0D0F] p-5">
+        <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.16em] text-[#00E676]">
+          loading_latest_article...
+        </p>
+      </section>
+    );
+  }
+ if (articleError || !latestArticle) {
+    return (
+      <section className="border border-[#26221F]/80 bg-[#0B0D0F] p-5">
+        <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.16em] text-[#8F7A68]">
+          no_article_found
+        </p>
+      </section>
+    );
+  }
   return (
       <section className="min-h-screen w-full bg-[#0E0D0C] flex flex-col justify-center items-center p-6 relative">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-[0.35] pointer-events-none"></div>
@@ -11,14 +61,14 @@ function BlogSnapshot() {
             </div>
             
             <h2 className="font-[Plus_Jakarta_Sans] text-4xl md:text-5xl text-white font-black uppercase tracking-tight mb-6 leading-none">
-              Dompter l'allocation de mémoire.
+             {latestArticle.title}
             </h2>
             
             <p className="text-slate-300 text-base md:text-lg font-[Inter] leading-relaxed mb-8 italic text-left border-l-2 border-amber-950 pl-4">
-              "On oublie vite à quel point les langages modernes nous cachent la tuyauterie. Reconstruire des structures de données de base en gérant soi-même ses pointeurs, c'est l'équivalent de démonter un moteur à nu..."
+                {latestArticle.excerpt}
             </p>
             
-            <a href="#" className="inline-block font-[JetBrains_Mono] text-sm font-bold text-white bg-[#F97316] hover:bg-white hover:text-black px-8 py-4 uppercase tracking-wider transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+            <a href="#"  onClick={() => navigate(`/journal/${latestArticle.slug}`)} className="inline-block font-[JetBrains_Mono] text-sm font-bold text-white bg-[#F97316] hover:bg-white hover:text-black px-8 py-4 uppercase tracking-wider transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
               [ Ouvrir la réflexion - ]
             </a>
             
