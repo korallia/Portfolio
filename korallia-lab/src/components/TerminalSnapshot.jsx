@@ -213,7 +213,7 @@ function TerminalSnapshot() {
                     }
                     className="w-full border-2 border-[#00E676] bg-[#00E676]/5 px-4 py-3 text-left font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] text-[#00E676] transition hover:bg-[#00E676]/10"
                   >
-                    ↳ open_project_detail
+                    ↳ ouvrir_project_detail
                   </button>
                 </div>
               </div>

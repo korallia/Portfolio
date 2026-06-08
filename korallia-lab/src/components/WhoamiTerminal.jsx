@@ -76,7 +76,7 @@ function WhoamiTerminal() {
                 <p className="leading-relaxed">
                   <span className="text-[#C97A2B] font-bold">MAKER=</span>
                   <span className="text-slate-300">
-                    "esprit ingénieur, microcontrôleurs, schémas, circuits et PCB"
+                    "esprit ingénieux, microcontrôleurs, schémas, circuits et PCB"
                   </span>
                 </p>
               </div>

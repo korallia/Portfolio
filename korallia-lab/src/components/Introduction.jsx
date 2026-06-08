@@ -23,9 +23,10 @@ function Introduction() {
             </p>
             
             <p className="text-slate-300 text-lg md:text-xl max-w-3xl leading-relaxed font-[Inter] border-l-4 border-amber-950/80 pl-6 my-8">
-              Entrepreneure, développeuse et <span className="text-white font-bold underline decoration-[#F97316]">maker</span> dans l'âme. Je prends l'impalpable — vos concepts de business, votre imaginaire, vos systèmes complexes — et je le matérialise avec du code de pointe. Du pixel jusqu'au hardware.
-            </p>
-            
+            Développeuse, entrepreneure et maker  dans l'âme. 
+Je construis des projets numériques en pensant autant à l'interface qu'à la logique qui la soutient.<br />
+Expérience utilisateur, architecture, automatisation, hardware : je relie les couches d'un système pour qu'il tienne, s'adapte et avance.
+             </p>
             <div className="mt-12 flex items-center gap-3 text-sm font-[JetBrains_Mono] text-[#F59E0B] font-bold tracking-wider">
               <span className="bg-[#F59E0B]/10 px-3 py-1 border border-[#F59E0B]/30 animate-pulse">SYSTEM_READY</span>
               <span>[ SCROLL POUR ALLUMER LA MACHINE ] ↓</span>

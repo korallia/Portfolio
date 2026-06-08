@@ -1,28 +1,28 @@
 
     function ExperienceBuilds( {setCvConsoleOpen}) {
 
-        const experienceBuilds = [
-        {
-        key: "PANASSOR",
-        color: "text-amber-500 border-amber-950/60",
-        text: "co-founder · CTO · product strategy · ops · e-commerce · production systems",
-        },
-        {
-        key: "PHOENIX_GN",
-        color: "text-fuchsia-400 border-fuchsia-950/60",
-        text: "frontend modernization · UX structure · custom portal rebuild",
-        },
-        {
-        key: "BLAX",
-        color: "text-sky-400 border-sky-950/60",
-        text: "full-stack development · debugging · releases · product reliability",
-        },
-        {
-        key: "MICRO_FOCUS",
-        color: "text-violet-300 border-violet-900/70",
-        text: "enterprise Java · software maintenance · technical use cases",
-        },
-    ];
+       const experienceBuilds = [
+  {
+    key: "PANASSOR",
+    color: "text-amber-500 border-amber-950/60",
+    text: "cofondatrice · CTO · stratégie produit · opérations · e-commerce · systèmes de production",
+  },
+  {
+    key: "PHOENIX_GN",
+    color: "text-fuchsia-400 border-fuchsia-950/60",
+    text: "modernisation frontend · structure UX · refonte de portail personnalisé",
+  },
+  {
+    key: "BLAX",
+    color: "text-sky-400 border-sky-950/60",
+    text: "développement full-stack · débogage · déploiements · fiabilité produit",
+  },
+  {
+    key: "MICRO_FOCUS",
+    color: "text-violet-300 border-violet-900/70",
+    text: "Java entreprise · maintenance logicielle · cas d'utilisation techniques",
+  },
+];
   return (
         <div className="bg-[#020304] border-2 border-[#26221F] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
             <div className="border-b-2 border-[#26221F] px-4 py-2 bg-[#0B0D0F] flex justify-between items-center">

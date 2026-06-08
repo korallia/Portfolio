@@ -54,12 +54,6 @@ function NavBar() {
             [ Accueil ]
           </button>
 
-          <button
-            onClick={() => goTo("/repertoire")}
-            className={navItemClass("/repertoire")}
-          >
-            [ Répertoire ]
-          </button>
 
           <button
             onClick={() => goTo("/whoami")}
@@ -67,7 +61,14 @@ function NavBar() {
           >
             [ WHOAMI ]
           </button>
-
+          
+          <button
+            onClick={() => goTo("/repertoire")}
+            className={navItemClass("/repertoire")}
+          >
+            [ Répertoire ]
+          </button>
+          
           <button
             onClick={() => goTo("/journal")}
             className={navItemClass("/journal")}
@@ -102,6 +103,12 @@ function NavBar() {
             >
               [ Accueil ]
             </button>
+            <button
+              onClick={() => goTo("/whoami")}
+              className={mobileNavItemClass("/whoami")}
+            >
+              [ WHOAMI ]
+            </button>
 
             <button
               onClick={() => goTo("/repertoire")}
@@ -110,12 +117,7 @@ function NavBar() {
               [ Répertoire ]
             </button>
 
-            <button
-              onClick={() => goTo("/whoami")}
-              className={mobileNavItemClass("/whoami")}
-            >
-              [ WHOAMI ]
-            </button>
+           
 
             <button
               onClick={() => goTo("/journal")}
