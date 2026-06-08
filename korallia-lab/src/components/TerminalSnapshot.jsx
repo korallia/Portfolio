@@ -53,7 +53,7 @@ const techStyles = {
   SQL: skillStyles[3].node,
 };
 
-function truncateText(text = "", maxLength = 140) {
+function truncateText(text = "", maxLength = 220) {
   if (!text) return "";
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength).trim()}...`;
@@ -116,78 +116,91 @@ function TerminalSnapshot() {
   }, []);
 
   const featuredProject = projects[0];
-  const featuredModules = featuredBranch?.modules || [];
+
+  const textCardBase =
+    "border border-[#26221F]/80 bg-[#0B0D0F] p-4";
+
+  const textCardOrange =
+    "border border-[#26221F]/80 border-l-2 border-l-[#F97316] bg-[#0B0D0F] p-4";
 
   return (
-    <section className="min-h-screen w-full bg-[#07080a] bg-[linear-gradient(to_right,#141612_1px,transparent_1px),linear-gradient(to_bottom,#141612_1px,transparent_1px)] bg-[size:2rem_2rem] flex flex-col justify-center p-4 md:p-16 border-t-4 border-b-4 border-[#24201E]">
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="flex items-center justify-between border-4 border-[#00E676] bg-[#0B0D0F] p-4 mb-8 font-[JetBrains_Mono] shadow-[4px_4px_0px_0px_rgba(0,230,118,0.2)]">
+    <section className="h-screen w-full overflow-hidden border-y-4 border-[#24201E] bg-[#07080a] bg-[linear-gradient(to_right,#141612_1px,transparent_1px),linear-gradient(to_bottom,#141612_1px,transparent_1px)] bg-[size:2rem_2rem] p-4 md:p-16">
+      <div className="mx-auto flex h-full w-full max-w-6xl flex-col justify-center">
+        {/* TOP BAR */}
+        <div className="mb-8 flex items-center justify-between border-4 border-[#00E676] bg-[#0B0D0F] p-4 font-[JetBrains_Mono] shadow-[4px_4px_0px_0px_rgba(0,230,118,0.2)]">
           <div className="flex items-center gap-3">
-            <span className="h-4 w-4 rounded-none bg-[#00E676] shadow-[0_0_15px_#00E676] inline-block animate-pulse" />
+            <span className="inline-block h-4 w-4 bg-[#00E676] shadow-[0_0_15px_#00E676]" />
 
-            <span className="text-[#00E676] text-base font-black tracking-widest">
-              ⚡ ENGINE::RUNNING_PROJECTS
+            <span className="text-base font-black uppercase tracking-[0.18em] text-[#00E676]">
+              ⚡ engine::project_preview
             </span>
           </div>
 
           <button
             onClick={() => navigate("/repertoire")}
-            className="text-xs text-[#00E676]/60 font-bold hidden md:block hover:text-[#00E676] transition"
+            className="border border-[#00E676]/70 bg-[#00E676]/5 px-4 py-2 font-[JetBrains_Mono] text-[11px] font-black uppercase tracking-[0.16em] text-[#00E676] transition hover:bg-[#00E676]/10 hover:shadow-[0_0_12px_rgba(0,230,118,0.18)]"
           >
-            CORE_LOAD: ACTIVE
+            [ ouvrir_le_repertoire ]
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 font-[JetBrains_Mono]">
-          <div className="lg:col-span-5 bg-[#0B0D0F] border-2 border-[#26221F] p-6 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]">
+        <div className="grid grid-cols-1 gap-8 font-[JetBrains_Mono] lg:grid-cols-12">
+          {/* LEFT PANEL - NO BORDER */}
+          <div className="min-h-[460px] bg-[#0B0D0F] p-6 shadow-[4px_4px_0px_0px_rgba(0,80,45,0.22)] lg:col-span-5">
             {isLoadingProjects ? (
               <div>
-                <span className="text-xs text-slate-500 block mb-2">
-                  // INTERFACE_NAME
+                <span className="mb-3 block text-xs uppercase tracking-[0.14em] text-slate-500">
+                  // loading_project
                 </span>
 
-                <h2 className="text-white text-3xl font-black tracking-tighter mb-4 uppercase">
-                  loading_projects...
+                <h2 className="mb-6 text-5xl font-black uppercase tracking-[0.06em] text-white">
+                  loading...
                 </h2>
 
-                <p className="text-slate-400 text-sm font-[Inter] leading-relaxed">
+                <p className="font-[Inter] text-[18px] leading-8 text-[#D5C4B4]">
                   Chargement du répertoire technique.
                 </p>
               </div>
             ) : projectsError || !featuredProject ? (
               <div>
-                <span className="text-xs text-slate-500 block mb-2">
-                  // INTERFACE_ERROR
+                <span className="mb-3 block text-xs uppercase tracking-[0.14em] text-slate-500">
+                  // project_error
                 </span>
 
-                <h2 className="text-white text-3xl font-black tracking-tighter mb-4 uppercase">
-                  archive_unavailable
+                <h2 className="mb-6 text-5xl font-black uppercase tracking-[0.06em] text-white">
+                  unavailable
                 </h2>
 
-                <p className="text-slate-400 text-sm font-[Inter] leading-relaxed">
+                <p className="font-[Inter] text-[18px] leading-8 text-[#D5C4B4]">
                   {projectsError || "Aucun projet disponible pour le moment."}
                 </p>
               </div>
             ) : (
-              <>
+              <div className="flex h-full flex-col">
                 <div>
-                  <span className="text-xs text-slate-500 block mb-2">
-                    // INTERFACE_NAME
+                  <span className="mb-4 block text-xs uppercase tracking-[0.14em] text-slate-500">
+                    // featured_project
                   </span>
 
-                  <h2 className="text-white text-3xl font-black tracking-tighter mb-4 uppercase">
+                  <h2 className="mb-7 font-[Plus_Jakarta_Sans] text-5xl font-black uppercase leading-none tracking-[0.1em] text-white md:text-6xl">
                     {featuredProject.name.replaceAll("_", " ")}
                   </h2>
 
-                  <p className="text-slate-400 text-sm font-[Inter] leading-relaxed">
+                  <p className="mb-4 font-[Inter] text-[17px] leading-8 text-[#D5C4B4]">
                     {featuredProject.description}
                   </p>
+                </div>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {(featuredProject.stack || []).slice(0, 5).map((tech) => (
+                <div className="mt-12 border-t-2 border-dashed border-[#26221F] pt-6">
+                  <p className="mb-6 text-m font-black uppercase tracking-[0.18em] text-[#00E676]">
+                    tech_stack
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {(featuredProject.stack || []).map((tech) => (
                       <span
                         key={tech}
-                        className={`border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] ${
+                        className={`mb-2 border px-2 py-1 text-[12px] font-bold uppercase tracking-[0.12em] ${
                           techStyles[tech] || skillStyles[2].node
                         }`}
                       >
@@ -197,109 +210,126 @@ function TerminalSnapshot() {
                   </div>
                 </div>
 
-                <div className="mt-8 lg:mt-0 border-t-2 border-dashed border-[#26221F] pt-6">
-                  <div className="text-xs text-[#00E676] font-bold mb-2">
-                    ⚡ OBSTACLE_TECHNIQUE:
-                  </div>
-
+                <div className="mt-auto pt-8">
                   <button
                     onClick={() =>
                       navigate(`/repertoire/${featuredProject.slug}`)
                     }
-                    className="w-full text-left text-[#00E676] text-xs bg-[#00E676]/5 border-2 border-[#00E676] p-3 font-bold leading-5 transition hover:bg-[#00E676]/10"
+                    className="w-full border-2 border-[#00E676] bg-[#00E676]/5 px-4 py-3 text-left font-[JetBrains_Mono] text-xs font-black uppercase tracking-[0.12em] text-[#00E676] transition hover:bg-[#00E676]/10"
                   >
-                    ↳{" "}
-                    {truncateText(
-                      featuredBranch?.obstacle ||
-                        "Chargement de la lecture technique du projet.",
-                      145
-                    )}
+                    ↳ open_project_detail
                   </button>
                 </div>
-              </>
+              </div>
             )}
           </div>
 
-          <div className="lg:col-span-7 bg-[#020304] border-4 border-[#26221F] p-6 text-sm shadow-[12px_12px_0px_0px_rgba(0,0,0,0.7)] relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-[#00E676]/10 animate-pulse" />
+          {/* RIGHT PANEL - TOP ACCENT + RIGHT DEPTH */}
+          <div className="relative min-h-[460px] bg-[#020304] p-6 lg:col-span-7">
+            <div className="absolute -right-2 top-2 h-full w-2 bg-[#062818]/70" />
 
-            <div className="flex justify-between items-center border-b-2 border-[#26221F] pb-3 mb-5 text-slate-500 text-xs font-bold">
-              <span>
-                PROJECT_DETAIL_PREVIEW //{" "}
-                {featuredBranch?.name || "MAIN_BRANCH"}
-              </span>
+            <div className="relative z-10">
+              <div className="mb-5 flex items-center justify-between border-b border-[#26221F]/60 pb-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                <span className="flex items-center gap-2">
+                  <span>project_detail_preview //</span>
 
-              <span className="text-[#00E676]">ONLINE</span>
-            </div>
+                  <span className="border border-[#F97316]/40 bg-[#F97316]/10 px-2 py-1 text-[#F59E0B]">
+                    {featuredBranch?.name || "main_branch"}
+                  </span>
+                </span>
 
-            {isLoadingProjects ? (
-              <div className="border border-[#26221F]/80 bg-[#0B0D0F] p-4">
-                <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.14em] text-[#8F7A68]">
-                  loading_project_preview...
-                </p>
+                <span className="text-[#00E676]">online</span>
               </div>
-            ) : projectsError || !featuredProject ? (
-              <div className="border border-[#26221F]/80 bg-[#0B0D0F] p-4">
-                <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.14em] text-[#8F7A68]">
-                  preview_unavailable
-                </p>
-              </div>
-            ) : (
-              <div className="grid gap-4">
-                <div className="border border-[#26221F]/80 border-l-2 border-l-[#00E676] bg-[#00E676]/5 p-4">
-                  <div className="mb-2 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                    project_summary
-                  </div>
 
-                  <p className="font-[Inter] text-[14px] leading-6 text-[#BBAA9A]">
-                    {truncateText(
-                      featuredProject.summary ||
-                        "Résumé technique du projet chargé depuis la base de données.",
-                      240
-                    )}
+              {isLoadingProjects ? (
+                <article className={textCardOrange}>
+                  <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                    loading_preview
                   </p>
-                </div>
 
-                <div>
-                  <div className="mb-3 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.16em] text-[#00E676]">
-                    modules_touched
+                  <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                    Chargement de la fiche détaillée du projet.
+                  </p>
+                </article>
+              ) : projectsError || !featuredProject ? (
+                <article className={textCardOrange}>
+                  <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                    preview_unavailable
+                  </p>
+
+                  <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                    Impossible de charger la fiche de projet.
+                  </p>
+                </article>
+              ) : (
+                <div className="grid gap-4">
+                  {/* SUMMARY - DARK BORDER + ORANGE LEFT BORDER */}
+                  <article className={textCardOrange}>
+                    <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                      project_summary
+                    </p>
+
+                    <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                      {truncateText(
+                        featuredProject.summary ||
+                          "Résumé technique du projet chargé depuis la base de données.",
+                        260
+                      )}
+                    </p>
+                  </article>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {/* OBJECTIVE - DARK BORDER ONLY */}
+                    <article className={textCardBase}>
+                      <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                        objective
+                      </p>
+
+                      <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                        {truncateText(featuredBranch?.objective, 170)}
+                      </p>
+                    </article>
+
+                    {/* TECHNICAL OBSTACLE - DARK BORDER + ORANGE LEFT BORDER */}
+                    <article className={textCardOrange}>
+                      <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                        technical_obstacle
+                      </p>
+
+                      <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                        {truncateText(featuredBranch?.obstacle, 170)}
+                      </p>
+                    </article>
                   </div>
 
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {featuredModules.slice(0, 4).map((module) => (
-                      <div
-                        key={module.id || module.name}
-                        className="border border-[#26221F]/80 bg-[#0B0D0F] p-3"
-                      >
-                        <p className="font-[JetBrains_Mono] text-[11px] font-bold uppercase tracking-[0.12em] text-[#00E676]">
-                          /src/{module.name}
-                        </p>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {/* RESULT - DARK BORDER ONLY */}
+                    <article className={textCardBase}>
+                      <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                        result_impact
+                      </p>
 
-                        <p className="mt-2 font-[Inter] text-[12px] leading-5 text-[#8F7A68]">
-                          {truncateText(module.description, 95)}
-                        </p>
-                      </div>
-                    ))}
+                      <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                        {truncateText(featuredBranch?.result, 170)}
+                      </p>
+                    </article>
+
+                    {/* ARCHITECTURE - DARK BORDER ONLY */}
+                    <article className={textCardBase}>
+                      <p className="mb-3 font-[JetBrains_Mono] text-[10px] font-black uppercase tracking-[0.18em] text-[#F59E0B]">
+                        architecture_decision
+                      </p>
+
+                      <p className="font-[Inter] text-[14px] leading-7 text-[#C8B8A8]">
+                        {truncateText(featuredBranch?.decision, 170)}
+                      </p>
+                    </article>
                   </div>
-                </div>
 
-                <div className="border-t border-[#26221F]/60 pt-4 flex items-center justify-between gap-4">
-                  <div className="font-[JetBrains_Mono] text-xs text-[#00E676]">
-                    korallia-lab@system:~$
-                    <span className="ml-2 inline-block h-4 w-2 animate-pulse bg-[#00E676] align-middle shadow-[0_0_10px_#00E676]" />
-                  </div>
-
-                  <button
-                    onClick={() =>
-                      navigate(`/repertoire/${featuredProject.slug}`)
-                    }
-                    className="border border-[#00E676]/45 bg-[#00E676]/5 px-4 py-2 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.14em] text-[#00E676] transition hover:bg-[#00E676]/10"
-                  >
-                    open_project_detail
-                  </button>
+                
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
