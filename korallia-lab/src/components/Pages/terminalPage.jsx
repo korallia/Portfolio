@@ -95,30 +95,30 @@ export default function TerminalPage() {
 }, []);
 
 return (
-  <main className="min-h-screen w-full bg-[#050607] px-4 py-16 text-slate-300 selection:bg-[#00E676]/30 md:px-12">
+  <main className="min-h-screen w-full bg-[#050607] px-4 pb-16 pt-28 text-slate-300 selection:bg-[#00E676]/30 md:px-12 md:pt-32">
     <section className="relative left-1/2 w-full max-w-6xl -translate-x-1/2">
       <div className="relative border-2 border-[#2A211C] border-t-[#00E676] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(0,80,45,0.22)]">
         <div className="absolute -right-2 top-2 h-full w-2 bg-[#062818]/70" />
         <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#062818]/70" />
 
-        <header className="relative z-10 flex items-start justify-between gap-8 border-b border-[#26221F]/60 bg-[#0B0D0F] px-8 pb-9 pt-10 md:px-12">
-          <div>
+        <header className="relative z-10 flex min-w-0 items-start justify-between gap-8 overflow-hidden border-b border-[#26221F]/60 bg-[#0B0D0F] px-5 pb-9 pt-10 md:px-12">
+          <div className="min-w-0">
             <div className="mb-5 flex items-center gap-2 font-[JetBrains_Mono] text-xs uppercase tracking-widest text-[#00E676]">
               <span>[ current_directories ]</span>
             </div>
 
-            <h1 className="font-[Plus_Jakarta_Sans] text-5xl font-black uppercase leading-none tracking-[0.22em] md:text-6xl">
-              <span className="text-[#E8EFEA]">Repertoire</span>
+           <h1 className="max-w-full font-[Plus_Jakarta_Sans] text-[clamp(2.2rem,10vw,4.5rem)] font-black uppercase leading-none tracking-[clamp(0.04em,1.1vw,0.22em)] text-[#E8EFEA]">
+             <span>Repertoire</span>
               <span className="text-[#00E676]">_</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl font-[Inter] text-[20px] leading-7 text-[#BBAA9A]">
+           <p className="mt-6 max-w-2xl font-[Inter] text-[16px] leading-7 text-[#BBAA9A] md:text-[20px]">
               Une archive technique courte pour présenter les projets actifs,
               leur rôle, leur état et les technologies utilisées.
             </p>
           </div>
 
-          <p className="hidden pt-12 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.2em] text-[#8F7A68] md:block">
+         <p className="hidden shrink-0 pt-12 font-[JetBrains_Mono] text-[10px] font-bold uppercase tracking-[0.2em] text-[#8F7A68] md:block">
             VIEW: CURRENT_DIRECTORIES
           </p>
         </header>
