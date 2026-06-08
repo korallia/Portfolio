@@ -21,7 +21,7 @@ function ArchivesJournal({ entries = [], loading, error }) {
 
   if (loading) {
     return (
-      <section className="relative left-1/2 mt-10 mb-32 w-[min(78rem,calc(100vw-12rem))] -translate-x-1/2">
+      <section className="relative left-1/2 mt-10 mb-32 w-[calc(100vw-2rem)] sm:w-[min(78rem,calc(100vw-4rem))] -translate-x-1/2">
         <div className="border-2 border-[#2A211C] border-t-[#F97316] bg-[#0B0D0F] p-12 font-[JetBrains_Mono] text-[#F59E0B] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.12)]">
           [ LOADING_ARCHIVES... ]
         </div>
@@ -31,7 +31,7 @@ function ArchivesJournal({ entries = [], loading, error }) {
 
   if (error) {
     return (
-      <section className="relative left-1/2 mt-10 mb-32 w-[min(78rem,calc(100vw-12rem))] -translate-x-1/2">
+      <section className="relative left-1/2 mt-10 mb-32 w-[calc(100vw-2rem)] sm:w-[min(78rem,calc(100vw-4rem))] -translate-x-1/2">
         <div className="border-2 border-[#2A211C] border-t-[#EF4444] bg-[#0B0D0F] p-12 font-[JetBrains_Mono] text-[#EF4444] shadow-[8px_8px_0px_0px_rgba(239,68,68,0.12)]">
           [ ERROR ] {error}
         </div>
@@ -40,24 +40,24 @@ function ArchivesJournal({ entries = [], loading, error }) {
   }
 
   return (
-    <section id="archives" className="relative left-1/2 mt-10 mb-32 w-[min(78rem,calc(100vw-12rem))] -translate-x-1/2">
+    <section id="archives" className="relative left-1/2 mt-10 mb-32 w-[calc(100vw-2rem)] sm:w-[min(78rem,calc(100vw-4rem))] -translate-x-1/2">
       <div className="relative border-2 border-[#2A211C] border-t-[#F97316] bg-[#0B0D0F] shadow-[8px_8px_0px_0px_rgba(249,115,22,0.12)]">
         <div className="absolute -right-2 top-2 h-full w-2 bg-[#3A1F0B]/70" />
         <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#3A1F0B]/70" />
 
         {/* HEADER */}
-        <div className="relative z-10 px-8 md:px-12 pt-10 pb-9 border-b border-[#26221F] bg-[#0B0D0F] flex items-start justify-between gap-8">
+        <div className="relative z-10 flex min-w-0 items-start justify-between gap-8 overflow-hidden border-b border-[#26221F] bg-[#0B0D0F] px-5 pb-9 pt-10 md:px-12">
           <div>
             <div className="flex items-center gap-2 text-xs font-[JetBrains_Mono] text-[#F59E0B] tracking-widest uppercase mb-5">
               <span>[ Archives_Index ]</span>
             </div>
 
-            <h1 className="font-[Plus_Jakarta_Sans] text-5xl md:text-6xl font-black uppercase tracking-[0.22em] leading-none">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] via-[#F97316] to-[#EF4444]">
-                Archives
-              </span>
-              <span className="text-[#F59E0B]">_</span>
-            </h1>
+            <h1 className="font-[Plus_Jakarta_Sans] text-[clamp(2.25rem,13vw,4.5rem)] font-black uppercase tracking-[clamp(0.04em,1.4vw,0.22em)] leading-none">
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] via-[#F97316] to-[#EF4444]">
+    Archives
+  </span>
+  <span className="text-[#F59E0B]">_</span>
+</h1>
           </div>
 
           <p className="hidden md:block pt-12 font-[JetBrains_Mono] text-[10px] font-bold tracking-[0.2em] uppercase text-[#8F7A68]">
