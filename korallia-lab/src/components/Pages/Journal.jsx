@@ -1,4 +1,4 @@
-import ArchivesJournal from "../archivesJournal";
+import ArchivesJournal from "../ArchivesJournal";
 import JournalHero from "../JournalHero";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
