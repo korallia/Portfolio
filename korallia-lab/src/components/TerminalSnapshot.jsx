@@ -87,9 +87,9 @@ function TerminalSnapshot() {
         const featuredProject = loadedProjects[0];
 
         if (featuredProject?.slug) {
-          const detailResponse = await fetch(
-            `/api/projects/${featuredProject.slug}`
-          );
+         const detailResponse = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/projects/${featuredProject.slug}`
+);
 
           if (detailResponse.ok) {
             const detailData = await detailResponse.json();

@@ -139,7 +139,7 @@ useEffect(() => {
       }
 
       const data = await response.json();
-
+      
       setProject(data.project);
       setBranches(data.branches || []);
 
