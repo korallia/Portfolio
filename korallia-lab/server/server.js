@@ -15,8 +15,12 @@ app.use(express.json());
 app.use("/api/journal", journalRoutes);
 app.use("/api/projects", projectsRouter);
 
+app.get("/health", (req, res) => {
+  res.json({ ok: true });
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
+  console.log(`API running on ${PORT}`);
 });
