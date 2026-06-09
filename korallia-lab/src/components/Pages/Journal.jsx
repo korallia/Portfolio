@@ -14,7 +14,7 @@ const location = useLocation();
 useEffect(() => {
   const loadArchives = async () => {
     try {
-      const response = await fetch("/api/journal/archive");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/journal/archive`)
 
       if (!response.ok) {
         throw new Error("Erreur lors du chargement des archives.");

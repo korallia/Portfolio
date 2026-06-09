@@ -132,7 +132,7 @@ useEffect(() => {
       setIsLoadingProject(true);
       setProjectError(null);
 
-      const response = await fetch(`/api/projects/${slug}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${slug}`);
 
       if (!response.ok) {
         throw new Error("Erreur lors du chargement du projet.");

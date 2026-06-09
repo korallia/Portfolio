@@ -75,7 +75,7 @@ export default function TerminalPage() {
    useEffect(() => {
   const loadArchives = async () => {
     try {
-      const response = await fetch("/api/projects/archive");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/archive`)
 
       if (!response.ok) {
         throw new Error("Erreur lors du chargement des archives.");

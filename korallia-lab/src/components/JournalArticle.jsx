@@ -13,7 +13,7 @@ function JournalArticle() {
   useEffect(() => {
     const loadArticle = async () => {
       try {
-        const response = await fetch(`/api/journal/${slug}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/journal/${slug}`);
         if (!response.ok) throw new Error("Article introuvable.");
         const data = await response.json();
         setArticle(data);

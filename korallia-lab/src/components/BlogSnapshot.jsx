@@ -13,7 +13,7 @@ function BlogSnapshot() {
         setIsLoadingArticle(true);
         setArticleError(null);
 
-        const response = await fetch("/api/journal");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/journal/archive`)
 
         if (!response.ok) {
           throw new Error("Erreur lors du chargement du dernier article.");
