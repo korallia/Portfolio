@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { blogSnapshotContent } from "../../content/home/blogSnapshotContent";
@@ -12,52 +12,63 @@ function BlogSnapshot() {
 
   const text = blogSnapshotContent[lang] ?? blogSnapshotContent.fr;
 
-  const [latestArticle, setLatestArticle] = useState(null);
-  const [isLoadingArticle, setIsLoadingArticle] = useState(true);
-  const [articleError, setArticleError] = useState(null);
+const articlesCacheRef = useRef({});
+
+const [latestArticle, setLatestArticle] = useState(null);
+const [isLoadingArticle, setIsLoadingArticle] = useState(true);
+const [articleError, setArticleError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
+  const cachedArticles = articlesCacheRef.current[lang];
 
-    const loadLatestArticle = async () => {
-      try {
-        setIsLoadingArticle(true);
-        setArticleError(null);
+  if (cachedArticles) {
+    setLatestArticle(cachedArticles?.[0] || null);
+    setIsLoadingArticle(false);
+    setArticleError(null);
+    return;
+  }
 
-        const response = await fetch(
-  `${import.meta.env.VITE_API_URL}/api/journal/archive?lang=${lang}`
-);
-    
-        if (!response.ok) {
-          throw new Error(text.fetchError);
-        }
+  let isMounted = true;
 
-        const data = await response.json();
-        
+  const loadLatestArticle = async () => {
+    try {
+      setIsLoadingArticle(true);
+      setArticleError(null);
 
-        if (isMounted) {
-          setLatestArticle(data?.[0] || null);
-        }
-      } catch (err) {
-        console.error(err);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/journal/archive?lang=${lang}`
+      );
 
-        if (isMounted) {
-          setArticleError(err.message);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoadingArticle(false);
-        }
+      if (!response.ok) {
+        throw new Error(blogSnapshotContent[lang]?.fetchError || blogSnapshotContent.fr.fetchError);
       }
-    };
 
-    loadLatestArticle();
-    console.log(latestArticle)
+      const data = await response.json();
 
-    return () => {
-      isMounted = false;
-    };
-  }, [text.fetchError]);
+      articlesCacheRef.current[lang] = data;
+
+      if (isMounted) {
+        setLatestArticle(data?.[0] || null);
+      }
+    } catch (err) {
+      console.error(err);
+
+      if (isMounted) {
+        setArticleError(err.message);
+      }
+    } finally {
+      if (isMounted) {
+        setIsLoadingArticle(false);
+      }
+    }
+  };
+
+  loadLatestArticle();
+
+  return () => {
+    isMounted = false;
+  };
+}, [lang]);
 
   if (isLoadingArticle) {
     return (
