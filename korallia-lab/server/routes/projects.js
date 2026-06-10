@@ -3,30 +3,33 @@ import pool from "../db.js";
 
 const router = express.Router();
 
+
+
 /**
- * GET /api/projects
- * Liste courte pour la page répertoire
+ * GET /api/projects/archive?lang=fr
+ * Liste courte pour la page répertoire / snapshot
  */
-
-
 router.get("/archive", async (req, res) => {
   try {
-    const result = await pool.query(`
-     SELECT
-  id,
-  slug,
-  name,
-  category,
-  status,
-  path,
-  description,
-  stack,
-  display_order
-FROM projects
-ORDER BY display_order ASC;
-      ;
+    console.log("🔥 PROJECT ARCHIVE ROUTE HIT 🔥");
 
-    `);
+    const result = await pool.query(
+      `
+      SELECT
+        id,
+        slug,
+        name,
+        category,
+        status,
+        path,
+        description,
+        summary,
+        stack,
+        display_order
+      FROM projects
+      ORDER BY display_order ASC;
+      `
+    );
 
     res.json(result.rows);
   } catch (error) {
@@ -36,7 +39,7 @@ ORDER BY display_order ASC;
 });
 
 /**
- * GET /api/projects/:id
+ * GET /api/projects/:slug?lang=fr
  * Détail global du projet
  */
 router.get("/:slug", async (req, res) => {
