@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { blogSnapshotContent } from "../../content/home/blogSnapshotContent";
 import { useLanguage } from "../../context/useLanguage";
 
-function getLocalizedField(item, field, lang) {
-  return item?.[`${field}_${lang}`] ?? item?.[`${field}_fr`] ?? item?.[field] ?? "";
-}
+
 
 function BlogSnapshot() {
   const navigate = useNavigate();
@@ -27,14 +25,15 @@ function BlogSnapshot() {
         setArticleError(null);
 
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/journal/archive`
-        );
-
+  `${import.meta.env.VITE_API_URL}/api/journal/archive?lang=${lang}`
+);
+    
         if (!response.ok) {
           throw new Error(text.fetchError);
         }
 
         const data = await response.json();
+        
 
         if (isMounted) {
           setLatestArticle(data?.[0] || null);
@@ -53,6 +52,7 @@ function BlogSnapshot() {
     };
 
     loadLatestArticle();
+    console.log(latestArticle)
 
     return () => {
       isMounted = false;
@@ -79,10 +79,10 @@ function BlogSnapshot() {
     );
   }
 
-  const articleTitle = getLocalizedField(latestArticle, "title", lang);
-  const articleExcerpt = getLocalizedField(latestArticle, "excerpt", lang);
+
 
   return (
+    
     <section className="min-h-screen w-full bg-[#0E0D0C] flex flex-col justify-center items-center p-6 relative">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-[0.35] pointer-events-none" />
 
@@ -92,11 +92,11 @@ function BlogSnapshot() {
         </div>
 
         <h2 className="font-[Plus_Jakarta_Sans] text-4xl md:text-5xl text-white font-black uppercase tracking-tight mb-6 leading-none">
-          {articleTitle}
+          {latestArticle.title}
         </h2>
 
         <p className="text-slate-300 text-base md:text-lg font-[Inter] leading-relaxed mb-8 italic text-left border-l-2 border-amber-950 pl-4">
-          {articleExcerpt}
+          {latestArticle.excerpt}
         </p>
 
         <button
