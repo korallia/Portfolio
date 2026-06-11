@@ -1,70 +1,154 @@
+export const toneStyles = {
+  front: {
+    node: "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10",
+    line: "text-fuchsia-400 border-fuchsia-950/60",
+  },
+
+  back: {
+    node: "text-sky-400 border-sky-950/60 bg-sky-950/10",
+    line: "text-sky-400 border-sky-950/60",
+  },
+
+  software: {
+    node: "text-violet-300 border-violet-900/70 bg-violet-950/20",
+    line: "text-violet-300 border-violet-900/70",
+  },
+
+  data: {
+    node: "text-amber-500 border-amber-950/60 bg-amber-950/10",
+    line: "text-amber-500 border-amber-950/60",
+  },
+
+  neutral: {
+    node: "text-slate-400 border-zinc-800 bg-zinc-800/10",
+    line: "text-slate-300 border-zinc-800",
+  },
+
+  active: {
+    node: "text-emerald-400 border-emerald-950/60 bg-emerald-950/10",
+    line: "text-emerald-400 border-emerald-950/60",
+  },
+
+  orange: {
+    node: "border-orange-900/70 bg-orange-950/20 text-orange-400",
+    line: "text-orange-400 border-orange-900/70",
+  },
+
+  green: {
+    node: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+    line: "text-[#00E676] border-[#00E676]/70",
+  },
+};
+
 export const skillStyles = [
   {
     label: "FRONT",
     cat: "front",
-    node: "text-fuchsia-400 border-fuchsia-950/60 bg-fuchsia-950/10",
+    node: toneStyles.front.node,
   },
   {
     label: "BACK",
     cat: "back",
-    node: "text-sky-400 border-sky-950/60 bg-sky-950/10",
+    node: toneStyles.back.node,
   },
   {
     label: "SYSTEM",
     cat: "software",
-    node: "text-violet-300 border-violet-900/70 bg-violet-950/20",
+    node: toneStyles.software.node,
   },
   {
     label: "DATA",
     cat: "bd",
-    node: "text-amber-500 border-amber-950/60 bg-amber-950/10",
+    node: toneStyles.data.node,
   },
 ];
 
+export const groupStyles = {
+  front: toneStyles.front.node,
+  back: toneStyles.back.node,
+  software: toneStyles.software.node,
+  system: toneStyles.software.node,
+  bd: toneStyles.data.node,
+  data: toneStyles.data.node,
+};
+
+export const lineStyles = {
+  front: toneStyles.front.line,
+  back: toneStyles.back.line,
+  software: toneStyles.software.line,
+  system: toneStyles.software.line,
+  bd: toneStyles.data.line,
+  data: toneStyles.data.line,
+};
+
 export const techStyles = {
-  React: skillStyles[0].node,
-  "React.js": skillStyles[0].node,
-  "Next.js": skillStyles[0].node,
-  TailwindCSS: skillStyles[0].node,
-  "Framer Motion": skillStyles[0].node,
+  React: toneStyles.front.node,
+  "React.js": toneStyles.front.node,
+  "Next.js": toneStyles.front.node,
+  TailwindCSS: toneStyles.front.node,
+  "Framer Motion": toneStyles.front.node,
 
-  "Node.js": skillStyles[1].node,
-  TypeScript: skillStyles[1].node,
-  "Python/Flask": skillStyles[1].node,
-  "PHP/Laravel": skillStyles[1].node,
-  "Java/Spring Boot": skillStyles[1].node,
+  "Node.js": toneStyles.back.node,
+  TypeScript: toneStyles.back.node,
+  "Python/Flask": toneStyles.back.node,
+  "PHP/Laravel": toneStyles.back.node,
+  "Java/Spring Boot": toneStyles.back.node,
 
-  "Git CLI": skillStyles[2].node,
-  "Java/JVM": skillStyles[2].node,
-  "Java / JVM": skillStyles[2].node,
-  Python: skillStyles[2].node,
-  "C/C++": skillStyles[2].node,
-  "C / C++": skillStyles[2].node,
-  GoPiGo3: skillStyles[2].node,
-  "Finite State Machine": skillStyles[2].node,
-  IoT: skillStyles[2].node,
+  "Git CLI": toneStyles.software.node,
+  "Java/JVM": toneStyles.software.node,
+  "Java / JVM": toneStyles.software.node,
+  Python: toneStyles.software.node,
+  "C/C++": toneStyles.software.node,
+  "C / C++": toneStyles.software.node,
+  GoPiGo3: toneStyles.software.node,
+  "Finite State Machine": toneStyles.software.node,
+  IoT: toneStyles.software.node,
 
-  PostgreSQL: skillStyles[3].node,
-  Prisma: skillStyles[3].node,
-  MongoDB: skillStyles[3].node,
-  SQL: skillStyles[3].node,
+  PostgreSQL: toneStyles.data.node,
+  Prisma: toneStyles.data.node,
+  MongoDB: toneStyles.data.node,
+  MariaDB: toneStyles.data.node,
+  Neo4j: toneStyles.data.node,
+  SQL: toneStyles.data.node,
 };
 
 export const categoryStyles = {
-  WEB: skillStyles[0].node,
-  System: skillStyles[2].node,
-  Fullstack: skillStyles[1].node,
-  Architecture: skillStyles[3].node,
-  Infrastructure: skillStyles[2].node,
+  WEB: toneStyles.front.node,
+  System: toneStyles.software.node,
+  Fullstack: toneStyles.back.node,
+  Architecture: toneStyles.data.node,
+  Infrastructure: toneStyles.software.node,
 };
 
 export const statusStyles = {
-  IN_DEVELOPMENT: "border-orange-900/70 bg-orange-950/20 text-orange-400",
-  ACTIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
-  STABLE: "border-sky-900/70 bg-sky-950/20 text-sky-300",
-  COMPLETED: "border-sky-900/70 bg-sky-950/20 text-sky-300",
-  LIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+  IN_DEVELOPMENT: toneStyles.orange.node,
+  ACTIVE: toneStyles.green.node,
+  STABLE: toneStyles.back.node,
+  COMPLETED: toneStyles.back.node,
+  LIVE: toneStyles.green.node,
 };
+
+export const experienceStyles = {
+  PANASSOR: toneStyles.data.line,
+  PHOENIX_GN: toneStyles.front.line,
+  BLAX: toneStyles.back.line,
+  MICRO_FOCUS: toneStyles.software.line,
+};
+
+export const skillToneStyles = {
+  front: toneStyles.front.line,
+  back: `${toneStyles.back.line} bg-sky-950/10`,
+  system: toneStyles.neutral.line,
+  data: toneStyles.data.line,
+};
+
+export const statusBadgeStyles = {
+  active: toneStyles.active.node,
+  contract: toneStyles.back.node,
+  web: toneStyles.front.node,
+  enterprise: toneStyles.software.node,
+};
+
 export const branchThemes = {
   orange: {
     label: "orange",
@@ -74,7 +158,7 @@ export const branchThemes = {
     text: "text-orange-400",
     important: "border-l-orange-500 bg-orange-950/10",
     hover: "hover:border-orange-500/45 hover:text-orange-400",
-    active: "border-orange-900/70 bg-orange-950/20 text-orange-400",
+    active: toneStyles.orange.node,
   },
 
   green: {
@@ -85,7 +169,7 @@ export const branchThemes = {
     text: "text-[#00E676]",
     important: "border-l-[#00E676] bg-[#00E676]/5",
     hover: "hover:border-[#00E676]/45 hover:text-[#00E676]",
-    active: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+    active: toneStyles.green.node,
   },
 
   blue: {
@@ -96,7 +180,7 @@ export const branchThemes = {
     text: "text-sky-300",
     important: "border-l-sky-400 bg-sky-950/10",
     hover: "hover:border-sky-400/45 hover:text-sky-300",
-    active: "border-sky-900/70 bg-sky-950/20 text-sky-300",
+    active: toneStyles.back.node,
   },
 
   violet: {
@@ -107,6 +191,6 @@ export const branchThemes = {
     text: "text-violet-300",
     important: "border-l-violet-400 bg-violet-950/10",
     hover: "hover:border-violet-400/45 hover:text-violet-300",
-    active: "border-violet-900/70 bg-violet-950/20 text-violet-300",
+    active: toneStyles.software.node,
   },
 };

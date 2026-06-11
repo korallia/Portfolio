@@ -1,53 +1,42 @@
+import { memo } from "react";
 
-    function ExperienceBuilds( {setCvConsoleOpen}) {
+import { useLanguage } from "../../context/language/useLanguage";
+import { experienceBuildsContent } from "../../content/whoami/experienceBuildsContent";
+import { experienceStyles } from "../../data/techStyles"
 
-       const experienceBuilds = [
-  {
-    key: "PANASSOR",
-    color: "text-amber-500 border-amber-950/60",
-    text: "cofondatrice · CTO · stratégie produit · opérations · e-commerce · systèmes de production",
-  },
-  {
-    key: "PHOENIX_GN",
-    color: "text-fuchsia-400 border-fuchsia-950/60",
-    text: "modernisation frontend · structure UX · refonte de portail personnalisé",
-  },
-  {
-    key: "BLAX",
-    color: "text-sky-400 border-sky-950/60",
-    text: "développement full-stack · débogage · déploiements · fiabilité produit",
-  },
-  {
-    key: "MICRO_FOCUS",
-    color: "text-violet-300 border-violet-900/70",
-    text: "Java entreprise · maintenance logicielle · cas d'utilisation techniques",
-  },
-];
+function ExperienceBuilds({ setCvConsoleOpen }) {
+  const { lang } = useLanguage();
+  const text = experienceBuildsContent[lang] ?? experienceBuildsContent.fr;
+
   return (
-        <div className="bg-[#020304] border-2 border-[#26221F] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
-            <div className="border-b-2 border-[#26221F] px-4 py-2 bg-[#0B0D0F] flex justify-between items-center">
-              <span className="text-xs font-bold">[ /var/log/experience_builds ]</span>
-                <button
-                    onClick={() => setCvConsoleOpen(true)}
-                    className="text-[12px] text-orange-400 border border-orange-500/50 bg-orange-500/5 px-3 py-1 hover:bg-orange-500/15 hover:border-orange-400 transition-all font-bold cursor-pointer shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)] flex items-center h-full"
-                >
-                    ./RUN_CV.sh
-                </button>
-            </div>
+    <div className="border-2 border-[#26221F] bg-[#020304] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.7)]">
+      <div className="flex items-center justify-between border-b-2 border-[#26221F] bg-[#0B0D0F] px-4 py-2">
+        <span className="text-xs font-bold">{text.title}</span>
 
-            <div className="p-5 space-y-3 text-[10px] md:text-xs font-mono">
-              {experienceBuilds.map((item) => (
-                <div
-                  key={item.key}
-                  className={`grid grid-cols-[95px_1fr] gap-3 border-l pl-3 ${item.color}`}
-                >
-                  <span className="font-bold">{item.key}</span>
-                  <span className="text-slate-300">{item.text}</span>
-                </div>
-              ))}
-            </div>
-        </div>
-  )
+        <button
+          type="button"
+          onClick={() => setCvConsoleOpen(true)}
+          className="flex h-full cursor-pointer items-center border border-orange-500/50 bg-orange-500/5 px-3 py-1 text-[12px] font-bold text-orange-400 shadow-[2px_2px_0px_0px_rgba(249,115,22,0.08)] transition-all hover:border-orange-400 hover:bg-orange-500/15"
+        >
+          {text.runCv}
+        </button>
+      </div>
+
+      <div className="space-y-3 p-5 font-mono text-[10px] md:text-xs">
+        {text.items.map((item) => (
+          <div
+            key={item.key}
+            className={`grid grid-cols-[95px_1fr] gap-3 border-l pl-3 ${
+              experienceStyles[item.key] || "text-slate-400 border-zinc-800"
+            }`}
+          >
+            <span className="font-bold">{item.key}</span>
+            <span className="text-slate-300">{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default ExperienceBuilds
+export default memo(ExperienceBuilds);
