@@ -6,8 +6,8 @@ import { useLanguage } from "../../context/language/useLanguage";
 import { repertoireContent } from "../../content/repertoire/repertoireContent";
 
 import ProjectArchiveEntry from "../repertoire/ProjectArchiveEntry";
-import ProjectListState from "../Repertoire/ProjectListState";
-import RepertoireHeader from "../Repertoire/RepertoireHeader";
+import ProjectListState from "../repertoire/ProjectListState";
+import RepertoireHeader from "../repertoire/RepertoireHeader";
 
 function TerminalPage() {
   const navigate = useNavigate();
