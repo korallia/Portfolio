@@ -5,9 +5,9 @@ import { terminalSnapshotContent } from "../../content/home/terminalSnapshotCont
 import { useLanguage } from "../../context/language/useLanguage";
 import { useProjects } from "../../context/projects/useProjects";
 
-import FeaturedProjectPanel from "./terminal/FeaturedProjectPanel";
-import ProjectPreviewPanel from "./terminal/ProjectPreviewPanel";
-import TerminalTopBar from "./terminal/TerminalTopBar";
+import FeaturedProjectPanel from "./Terminal/FeaturedProjectPanel";
+import ProjectPreviewPanel from "./Terminal/ProjectPreviewPanel";
+import TerminalTopBar from "./Terminal/TerminalTopBar";
 
 function truncateText(text = "", maxLength = 220) {
   if (!text) return "";
