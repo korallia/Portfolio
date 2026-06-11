@@ -1,10 +1,9 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { blogSnapshotContent } from "../../content/home/blogSnapshotContent";
 import { useLanguage } from "../../context/language/useLanguage";
-
-
+import { getJournalArchive } from "../../services/journalCache";
 
 function BlogSnapshot() {
   const navigate = useNavigate();
@@ -12,63 +11,43 @@ function BlogSnapshot() {
 
   const text = blogSnapshotContent[lang] ?? blogSnapshotContent.fr;
 
-const articlesCacheRef = useRef({});
-
-const [latestArticle, setLatestArticle] = useState(null);
-const [isLoadingArticle, setIsLoadingArticle] = useState(true);
-const [articleError, setArticleError] = useState(null);
+  const [latestArticle, setLatestArticle] = useState(null);
+  const [isLoadingArticle, setIsLoadingArticle] = useState(true);
+  const [articleError, setArticleError] = useState(null);
 
   useEffect(() => {
-  const cachedArticles = articlesCacheRef.current[lang];
+    let isMounted = true;
 
-  if (cachedArticles) {
-    setLatestArticle(cachedArticles?.[0] || null);
-    setIsLoadingArticle(false);
-    setArticleError(null);
-    return;
-  }
+    const loadLatestArticle = async () => {
+      try {
+        setIsLoadingArticle(true);
+        setArticleError(null);
 
-  let isMounted = true;
+        const data = await getJournalArchive(lang);
 
-  const loadLatestArticle = async () => {
-    try {
-      setIsLoadingArticle(true);
-      setArticleError(null);
+        if (!isMounted) return;
 
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/journal/archive?lang=${lang}`
-      );
-
-      if (!response.ok) {
-        throw new Error(blogSnapshotContent[lang]?.fetchError || blogSnapshotContent.fr.fetchError);
-      }
-
-      const data = await response.json();
-
-      articlesCacheRef.current[lang] = data;
-
-      if (isMounted) {
         setLatestArticle(data?.[0] || null);
-      }
-    } catch (err) {
-      console.error(err);
+      } catch (err) {
+        console.error(err);
 
-      if (isMounted) {
+        if (!isMounted) return;
+
+        setLatestArticle(null);
         setArticleError(err.message);
+      } finally {
+        if (isMounted) {
+          setIsLoadingArticle(false);
+        }
       }
-    } finally {
-      if (isMounted) {
-        setIsLoadingArticle(false);
-      }
-    }
-  };
+    };
 
-  loadLatestArticle();
+    loadLatestArticle();
 
-  return () => {
-    isMounted = false;
-  };
-}, [lang]);
+    return () => {
+      isMounted = false;
+    };
+  }, [lang]);
 
   if (isLoadingArticle) {
     return (
@@ -90,30 +69,27 @@ const [articleError, setArticleError] = useState(null);
     );
   }
 
-
-
   return (
-    
-    <section className="min-h-screen w-full bg-[#0E0D0C] flex flex-col justify-center items-center p-6 relative">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-[0.35] pointer-events-none" />
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center bg-[#0E0D0C] p-6">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#24201E_1px,transparent_1px),linear-gradient(to_bottom,#24201E_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-[0.35]" />
 
-      <div className="max-w-2xl w-full text-center border-t-4 border-b-4 border-[#F97316] py-12 px-6 bg-[#0B0D0F]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] relative z-10">
-        <div className="text-xs font-bold uppercase tracking-widest text-[#F59E0B] mb-4 font-[JetBrains_Mono]">
+      <div className="relative z-10 w-full max-w-2xl border-t-4 border-b-4 border-[#F97316] bg-[#0B0D0F]/95 px-6 py-12 text-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-md">
+        <div className="mb-4 font-[JetBrains_Mono] text-xs font-bold uppercase tracking-widest text-[#F59E0B]">
           {text.eyebrow}
         </div>
 
-        <h2 className="font-[Plus_Jakarta_Sans] text-4xl md:text-5xl text-white font-black uppercase tracking-tight mb-6 leading-none">
+        <h2 className="mb-6 font-[Plus_Jakarta_Sans] text-4xl font-black uppercase leading-none tracking-tight text-white md:text-5xl">
           {latestArticle.title}
         </h2>
 
-        <p className="text-slate-300 text-base md:text-lg font-[Inter] leading-relaxed mb-8 italic text-left border-l-2 border-amber-950 pl-4">
+        <p className="mb-8 border-l-2 border-amber-950 pl-4 text-left font-[Inter] text-base italic leading-relaxed text-slate-300 md:text-lg">
           {latestArticle.excerpt}
         </p>
 
         <button
           type="button"
           onClick={() => navigate(`/journal/${latestArticle.slug}`)}
-          className="inline-block font-[JetBrains_Mono] text-sm font-bold text-white bg-[#F97316] hover:bg-white hover:text-black px-8 py-4 uppercase tracking-wider transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+          className="inline-block bg-[#F97316] px-8 py-4 font-[JetBrains_Mono] text-sm font-bold uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-white hover:text-black hover:shadow-none"
         >
           {text.cta}
         </button>
