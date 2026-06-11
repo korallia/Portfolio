@@ -49,3 +49,19 @@ export const techStyles = {
   MongoDB: skillStyles[3].node,
   SQL: skillStyles[3].node,
 };
+
+export const categoryStyles = {
+  WEB: skillStyles[0].node,
+  System: skillStyles[2].node,
+  Fullstack: skillStyles[1].node,
+  Architecture: skillStyles[3].node,
+  Infrastructure: skillStyles[2].node,
+};
+
+export const statusStyles = {
+  IN_DEVELOPMENT: "border-orange-900/70 bg-orange-950/20 text-orange-400",
+  ACTIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+  STABLE: "border-sky-900/70 bg-sky-950/20 text-sky-300",
+  COMPLETED: "border-sky-900/70 bg-sky-950/20 text-sky-300",
+  LIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+};
