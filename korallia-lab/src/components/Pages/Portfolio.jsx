@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import WhoamiTerminal from "../WhoamiTerminal";
-import TechStack from "../TechStack";
-import SideQuest from "../SideQuest";
-import ExperienceBuilds from "../ExperienceBuilds";
-import CVConsoleModal from "../CVConsoleModal";
+import WhoamiTerminal from "../whoami/WhoamiTerminal";
+import TechStack from "../whoami/TechStack";
+import SideQuest from "../whoami/SideQuest";
+import ExperienceBuilds from "../whoami/ExperienceBuilds";
+import CVConsoleModal from "../whoami/CVConsoleModal";
 
 const Portfolio = () => {
   const [isCvConsoleOpen, setIsCvConsoleOpen] = useState(false);

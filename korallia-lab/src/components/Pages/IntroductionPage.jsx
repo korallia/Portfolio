@@ -1,6 +1,6 @@
-import BlogSnapshot from '../BlogSnapshot'
-import TerminalSnapshot from '../TerminalSnapshot'
-import Introduction from '../Introduction'
+import BlogSnapshot from '../Home/BlogSnapshot'
+import TerminalSnapshot from '../Home/TerminalSnapshot'
+import Introduction from '../Home/Introduction'
 
 function IntroductionPage() {
   return (
@@ -8,7 +8,6 @@ function IntroductionPage() {
 
 
         <Introduction/>
-
         <TerminalSnapshot/>
         <BlogSnapshot/>
       

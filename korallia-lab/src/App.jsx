@@ -1,14 +1,14 @@
 import '/index.css'
-import Navbar from "./components/Navbar";
-import Footer from './components/Footer';
+import Navbar from "../src/components/layout/Navbar";
+import Footer from '../src/components/layout/Footer';
 import { Routes, Route } from "react-router-dom";
 import IntroductionPage from '../src/components/Pages/IntroductionPage'
 import Portfolio from './components/Pages/Portfolio';
 import Journal from '../src/components/Pages/Journal'
-import JournalArticle from './components/JournalArticle';
+import JournalArticle from './components/journal/JournalArticle';
 import TerminalPage from './components/Pages/terminalPage';
-import ProjectDetail from './components/ProjectDetail';
-import RouteReset from "./components/RouteReset";
+import ProjectDetail from './components/projectDetail/ProjectDetail';
+import RouteReset from "./components/layout/RouteReset";
 
 
 function App() {

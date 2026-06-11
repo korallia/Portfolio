@@ -3,9 +3,12 @@ import pool from "../db.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/archive", async (req, res) => {
   try {
-    const result = await pool.query(`
+    const { lang = "fr" } = req.query;
+
+    const result = await pool.query(
+      `
       SELECT
         number,
         slug,
@@ -13,37 +16,14 @@ router.get("/", async (req, res) => {
         excerpt,
         category,
         read_time,
-        cover_image_url,
-        cover_image_alt,
-        cover_image_caption,
-        status,
-        is_featured,
-        published_at
+        lang
       FROM journal_articles
       WHERE status = 'published'
+        AND lang = $1
       ORDER BY published_at DESC;
-    `);
-
-    res.json(result.rows);
-  } catch (error) {
-    console.error("Error fetching journal articles:", error);
-    res.status(500).json({ error: "Failed to fetch journal articles" });
-  }
-});
-router.get("/archive", async (req, res) => {
-  try {
-    const result = await pool.query(`
-      SELECT
-        number,
-        slug,
-        title,
-        excerpt,
-        category,
-        read_time
-      FROM journal_articles
-      WHERE status = 'published'
-      ORDER BY published_at DESC;
-    `);
+      `,
+      [lang]
+    );
 
     res.json(result.rows);
   } catch (error) {
@@ -55,6 +35,7 @@ router.get("/archive", async (req, res) => {
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
+     const { lang = "fr" } = req.query;
 
     const result = await pool.query(
       `
@@ -72,13 +53,15 @@ router.get("/:slug", async (req, res) => {
         content_html,
         status,
         is_featured,
-        published_at
+        published_at,
+        lang
       FROM journal_articles
       WHERE slug = $1
-      AND status = 'published'
+        AND status = 'published'
+        AND lang = $2
       LIMIT 1;
       `,
-      [slug]
+      [slug, lang]
     );
 
     if (result.rows.length === 0) {
