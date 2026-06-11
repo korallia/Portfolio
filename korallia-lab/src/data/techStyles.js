@@ -65,3 +65,48 @@ export const statusStyles = {
   COMPLETED: "border-sky-900/70 bg-sky-950/20 text-sky-300",
   LIVE: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
 };
+export const branchThemes = {
+  orange: {
+    label: "orange",
+    top: "border-t-orange-500",
+    glow: "shadow-[8px_8px_0px_0px_rgba(249,115,22,0.12)]",
+    dot: "bg-orange-500 shadow-[0_0_14px_#F97316]",
+    text: "text-orange-400",
+    important: "border-l-orange-500 bg-orange-950/10",
+    hover: "hover:border-orange-500/45 hover:text-orange-400",
+    active: "border-orange-900/70 bg-orange-950/20 text-orange-400",
+  },
+
+  green: {
+    label: "green",
+    top: "border-t-[#00E676]",
+    glow: "shadow-[8px_8px_0px_0px_rgba(0,80,45,0.22)]",
+    dot: "bg-[#00E676] shadow-[0_0_14px_#00E676]",
+    text: "text-[#00E676]",
+    important: "border-l-[#00E676] bg-[#00E676]/5",
+    hover: "hover:border-[#00E676]/45 hover:text-[#00E676]",
+    active: "border-[#00E676]/70 bg-[#00E676]/5 text-[#00E676]",
+  },
+
+  blue: {
+    label: "blue",
+    top: "border-t-sky-400",
+    glow: "shadow-[8px_8px_0px_0px_rgba(14,165,233,0.10)]",
+    dot: "bg-sky-400 shadow-[0_0_14px_#38BDF8]",
+    text: "text-sky-300",
+    important: "border-l-sky-400 bg-sky-950/10",
+    hover: "hover:border-sky-400/45 hover:text-sky-300",
+    active: "border-sky-900/70 bg-sky-950/20 text-sky-300",
+  },
+
+  violet: {
+    label: "violet",
+    top: "border-t-violet-400",
+    glow: "shadow-[8px_8px_0px_0px_rgba(139,92,246,0.10)]",
+    dot: "bg-violet-400 shadow-[0_0_14px_#A78BFA]",
+    text: "text-violet-300",
+    important: "border-l-violet-400 bg-violet-950/10",
+    hover: "hover:border-violet-400/45 hover:text-violet-300",
+    active: "border-violet-900/70 bg-violet-950/20 text-violet-300",
+  },
+};

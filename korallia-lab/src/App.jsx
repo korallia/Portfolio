@@ -7,7 +7,7 @@ import Portfolio from './components/Pages/Portfolio';
 import Journal from '../src/components/Pages/Journal'
 import JournalArticle from './components/JournalArticle';
 import TerminalPage from './components/Pages/terminalPage';
-import ProjectDetail from './components/ProjectDetail';
+import ProjectDetail from './components/projectDetail/ProjectDetail';
 import RouteReset from "./components/RouteReset";
 
 

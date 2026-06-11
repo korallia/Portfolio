@@ -6,9 +6,12 @@ import { useProjects } from "../../context/projects/useProjects";
 import ProjectArchiveEntry from "../repertoire/ProjectArchiveEntry";
 import ProjectListState from "../Repertoire/ProjectListState";
 import RepertoireHeader from "../Repertoire/RepertoireHeader";
-
+import { useLanguage } from "../../context/useLanguage";
+import { repertoireContent } from "../../content/repertoire/repertoireContent";
 function TerminalPage() {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
+const text = repertoireContent[lang] ?? repertoireContent.fr;
 
   const { projects, isLoadingProjects, projectsError } = useProjects();
 
@@ -26,12 +29,13 @@ function TerminalPage() {
           <div className="absolute -right-2 top-2 h-full w-2 bg-[#062818]/70" />
           <div className="absolute -bottom-2 left-2 h-2 w-full bg-[#062818]/70" />
 
-          <RepertoireHeader />
+         <RepertoireHeader text={text} />
 
           <div className="relative z-10 bg-[#050607]/70 pb-2">
-            <ProjectListState
+           <ProjectListState
               isLoading={isLoadingProjects}
               error={projectsError}
+              text={text}
             />
 
             {!isLoadingProjects &&
