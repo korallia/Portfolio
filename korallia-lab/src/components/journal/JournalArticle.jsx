@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useLanguage } from "../../context/language/useLanguage";
@@ -22,46 +22,75 @@ function JournalArticle() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const articleRef = useRef(null);
+const loadingDelayRef = useRef(null);
+
+useEffect(() => {
+  articleRef.current = article;
+}, [article]);
+
   useEffect(() => {
-    let isActive = true;
+  let isActive = true;
 
-    const loadArticle = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  const loadArticle = async () => {
+    const isInitialLoad = !articleRef.current;
 
-        const { article: data, resolvedSlug } = await getJournalArticleForRoute(
-          lang,
-          slug
-        );
+    try {
+      setError("");
 
-        if (!isActive) return;
-
-        setArticle(data);
-
-        if (resolvedSlug !== slug) {
-          navigate(`/journal/${resolvedSlug}`, { replace: true });
-        }
-      } catch (err) {
-        console.error(err);
-
-        if (!isActive) return;
-
-        setArticle(null);
-        setError(err.message);
-      } finally {
-        if (isActive) {
-          setLoading(false);
-        }
+      if (isInitialLoad) {
+        loadingDelayRef.current = setTimeout(() => {
+          if (isActive) {
+            setLoading(true);
+          }
+        }, 220);
       }
-    };
 
-    loadArticle();
+      const { article: data, resolvedSlug } = await getJournalArticleForRoute(
+        lang,
+        slug
+      );
 
-    return () => {
-      isActive = false;
-    };
-  }, [lang, slug, navigate]);
+      if (!isActive) return;
+
+      if (loadingDelayRef.current) {
+        clearTimeout(loadingDelayRef.current);
+        loadingDelayRef.current = null;
+      }
+
+      setArticle(data);
+      setLoading(false);
+
+      if (resolvedSlug !== slug) {
+        navigate(`/journal/${resolvedSlug}`, { replace: true });
+      }
+    } catch (err) {
+      console.error(err);
+
+      if (!isActive) return;
+
+      if (loadingDelayRef.current) {
+        clearTimeout(loadingDelayRef.current);
+        loadingDelayRef.current = null;
+      }
+
+      setArticle(null);
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  loadArticle();
+
+  return () => {
+    isActive = false;
+
+    if (loadingDelayRef.current) {
+      clearTimeout(loadingDelayRef.current);
+      loadingDelayRef.current = null;
+    }
+  };
+}, [lang, slug, navigate]);
 
   const backToArchives = () => {
     navigate("/journal#archives");
