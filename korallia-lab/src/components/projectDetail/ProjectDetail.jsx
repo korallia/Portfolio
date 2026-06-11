@@ -6,14 +6,14 @@ import { useProjects } from "../../context/projects/useProjects";
 import { projectDetailContent } from "../../content/projectDetail/projectDetailContent";
 import { statusStyles, branchThemes } from "../../data/techStyles";
 
-import BranchAnalysisGrid from "../ProjectDetail/BranchAnalysisGrid";
-import BranchModulesSection from "../ProjectDetail/BranchModulesSection";
-import BranchNextStepsSection from "../ProjectDetail/BranchNextStepsSection";
-import BranchSelector from "../ProjectDetail/BranchSelector";
-import ProjectDetailHeader from "../ProjectDetail/ProjectDetailHeader";
-import ProjectDetailState from "../ProjectDetail/ProjectDetailState";
-import ProjectDetailTopBar from "../ProjectDetail/ProjectDetailTopBar";
-import ProjectSummaryStack from "../ProjectDetail/ProjectSummaryStack";
+import BranchAnalysisGrid from "./BranchAnalysisGrid";
+import BranchModulesSection from "./BranchModulesSection";
+import BranchNextStepsSection from "./BranchNextStepsSection";
+import BranchSelector from "./BranchSelector";
+import ProjectDetailHeader from "./ProjectDetailHeader";
+import ProjectDetailState from "./ProjectDetailState";
+import ProjectDetailTopBar from "./ProjectDetailTopBar";
+import ProjectSummaryStack from "./ProjectSummaryStack";
 
 const fixedGreenTheme = branchThemes.green;
 
