@@ -5,11 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import '/index.css'
 import App from './App.jsx'
 import { LanguageProvider } from "./context/LanguageProvider.jsx";
+import { ProjectsProvider } from "./context/projects/ProjectsProvider.jsx";
 
 createRoot(document.getElementById('root')).render(
-   <BrowserRouter>
+  <BrowserRouter>
       <LanguageProvider>
-    <App />
-  </LanguageProvider>
-  </BrowserRouter>
+        <ProjectsProvider>
+          <App />
+        </ProjectsProvider>
+      </LanguageProvider>
+    </BrowserRouter>
 )
