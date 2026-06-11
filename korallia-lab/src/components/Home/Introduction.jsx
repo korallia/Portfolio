@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { introductionContent } from "../../content/home/introductionContent";
-import { useLanguage } from "../../context/useLanguage";
+import { useLanguage } from "../../context/language/useLanguage";
 
 function Introduction() {
   const navigate = useNavigate();

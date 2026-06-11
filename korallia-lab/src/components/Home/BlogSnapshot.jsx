@@ -2,7 +2,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { blogSnapshotContent } from "../../content/home/blogSnapshotContent";
-import { useLanguage } from "../../context/useLanguage";
+import { useLanguage } from "../../context/language/useLanguage";
 
 
 

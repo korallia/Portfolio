@@ -1,8 +1,8 @@
 import { memo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { navBarContent } from "../../src/content/layout/navBarContent";
-import { useLanguage } from "../context/useLanguage";
+import { navBarContent } from "../../content/layout/navBarContent";
+import { useLanguage } from "../../context/language/useLanguage";
 
 function NavBar() {
   const navigate = useNavigate();

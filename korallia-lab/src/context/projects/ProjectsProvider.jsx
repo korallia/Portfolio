@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { useLanguage } from "../useLanguage";
+import { useLanguage } from "../language/useLanguage";
 import { ProjectsContext } from "./projectsContext";
 import { getDefaultBranch, localizeProject } from "./projectLocalizers";
 

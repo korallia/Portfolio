@@ -2,12 +2,13 @@ import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useProjects } from "../../context/projects/useProjects";
+import { useLanguage } from "../../context/language/useLanguage";
+import { repertoireContent } from "../../content/repertoire/repertoireContent";
 
 import ProjectArchiveEntry from "../repertoire/ProjectArchiveEntry";
 import ProjectListState from "../Repertoire/ProjectListState";
 import RepertoireHeader from "../Repertoire/RepertoireHeader";
-import { useLanguage } from "../../context/useLanguage";
-import { repertoireContent } from "../../content/repertoire/repertoireContent";
+
 function TerminalPage() {
   const navigate = useNavigate();
   const { lang } = useLanguage();

@@ -1,7 +1,7 @@
 import { memo, useCallback, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useLanguage } from "../../context/useLanguage";
+import { useLanguage } from "../../context/language/useLanguage";
 import { useProjects } from "../../context/projects/useProjects";
 import { projectDetailContent } from "../../content/projectDetail/projectDetailContent";
 import { statusStyles, branchThemes } from "../../data/techStyles";

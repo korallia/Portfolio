@@ -2,7 +2,7 @@ import { memo, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { terminalSnapshotContent } from "../../content/home/terminalSnapshotContent";
-import { useLanguage } from "../../context/useLanguage";
+import { useLanguage } from "../../context/language/useLanguage";
 import { useProjects } from "../../context/projects/useProjects";
 
 import FeaturedProjectPanel from "./terminal/FeaturedProjectPanel";
